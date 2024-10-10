@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -10,7 +11,17 @@ import { MatDialogRef } from '@angular/material/dialog';
   }`
 })
 export class UserDialogComponent {
-  constructor(private matDialogRef: MatDialogRef<UserDialogComponent>) {}
+  studentForm: FormGroup;
+
+  constructor(private matDialogRef: MatDialogRef<UserDialogComponent>, private formBuilder: FormBuilder) {
+    this.studentForm = this.formBuilder.group({
+      firstName: [],
+      lastName: [],
+      email: [],
+      courses: [],
+    })
+  }
+
   onAdd(): void {
     this.matDialogRef.close({ result: 'hola'})
   }

@@ -1,18 +1,18 @@
 <h4 mat-dialog-title>Añade un estudiante!</h4>
 <div mat-dialog-content>
     <!-- STUDENT FORM -->
-    <form id="user-form">
+    <form id="user-form" [formGroup]="studentForm">
         <div class="row">
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
-                    <input matInput placeholder="Ej: Juan">
+                    <input formControlName="firstName" matInput placeholder="Ej: Juan">
                 </mat-form-field>
             </div>
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Apellido</mat-label>
-                    <input matInput placeholder="Ej: Perez">
+                    <input formControlName="lastName" matInput placeholder="Ej: Perez">
                 </mat-form-field>
             </div>
         </div>
@@ -21,6 +21,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Ingresa tu correo electronico</mat-label>
                     <input
+                    formControlName="email"
                     matInput
                     placeholder="Ej: tumail@example.com"
                     required/>
@@ -29,7 +30,7 @@
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Curso</mat-label>
-                    <mat-select multiple>
+                    <mat-select formControlName="courses" multiple>
                         <mat-option value="frontProg">Programación Frontend</mat-option>
                         <mat-option value="backProg">Programación Backend</mat-option>
                         <mat-option value="designUx">Diseño UX UI</mat-option>
