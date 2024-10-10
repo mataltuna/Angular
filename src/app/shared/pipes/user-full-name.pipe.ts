@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class UserFullNamePipe implements PipeTransform {
 
   transform(value: any, ...args: string[]): string {
-    return value.firstname + ' ' + value.lastname;
+    return value.firstName + ' ' + value.lastName;
   }
 }

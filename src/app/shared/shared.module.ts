@@ -40,7 +40,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     MatSelectModule,
     MatTableModule,
     UserFullNamePipe,
-    HighlightDirective
+    HighlightDirective,
+    
   ]
 })
 export class SharedModule { }

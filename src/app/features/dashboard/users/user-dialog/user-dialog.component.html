@@ -7,12 +7,18 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <input formControlName="firstName" matInput placeholder="Ej: Juan">
+                    <mat-error>
+                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Apellido</mat-label>
                     <input formControlName="lastName" matInput placeholder="Ej: Perez">
+                    <mat-error>
+                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -25,18 +31,24 @@
                     matInput
                     placeholder="Ej: tumail@example.com"
                     required/>
+                    <mat-error>
+                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Curso</mat-label>
                     <mat-select formControlName="courses" multiple>
-                        <mat-option value="frontProg">Programación Frontend</mat-option>
-                        <mat-option value="backProg">Programación Backend</mat-option>
-                        <mat-option value="designUx">Diseño UX UI</mat-option>
-                        <mat-option value="marketing">Marketing</mat-option>
-                        <mat-option value="cibersec">Ciberseguridad</mat-option>
+                        <mat-option value="Programación Frontend">Programación Frontend</mat-option>
+                        <mat-option value="Programación Backend">Programación Backend</mat-option>
+                        <mat-option value="Diseño UX UI">Diseño UX UI</mat-option>
+                        <mat-option value="Marketing">Marketing</mat-option>
+                        <mat-option value="Ciberseguridad">Ciberseguridad</mat-option>
                     </mat-select>
+                    <mat-error>
+                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
