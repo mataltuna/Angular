@@ -13,9 +13,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 
+/* PIPES */
+import { UserFullNamePipe } from './pipes/user-full-name.pipe';
+
+/* DIRECTIVES */
+import { HighlightDirective } from './directives/highlight.directive';
+
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    UserFullNamePipe,
+    HighlightDirective
+  ],
   imports: [
     CommonModule
   ],
@@ -29,7 +38,9 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    UserFullNamePipe,
+    HighlightDirective
   ]
 })
 export class SharedModule { }
