@@ -33,10 +33,12 @@ export class UsersComponent {
       .afterClosed()
       .subscribe({
         next: (result) => {
-          console.log('Recibimos: ', result);
-
           if(!!result) {
-            this.dataSource = [...this.dataSource,{ ...result}]
+            if(editingStudent) {
+              this.dataSource = this.dataSource.map((student => student.id === editingStudent.id ? {...student,...result} : student))
+            } else {
+              this.dataSource = [...this.dataSource,{ ...result}]
+            }
           }
         }
       })

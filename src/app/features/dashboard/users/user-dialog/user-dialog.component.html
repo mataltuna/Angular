@@ -1,4 +1,4 @@
-<h4 mat-dialog-title>Añade un estudiante!</h4>
+<h4 mat-dialog-title>{{data?.editingStudent ? 'Edita al ' : 'Añade un ' }} estudiante </h4>
 <div mat-dialog-content>
     <!-- STUDENT FORM -->
     <form id="user-form" [formGroup]="studentForm">

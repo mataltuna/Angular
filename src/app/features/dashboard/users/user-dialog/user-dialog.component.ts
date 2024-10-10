@@ -5,7 +5,7 @@ import { generateRandomString } from '../../../../shared/utils';
 import { Student } from '../models';
 
 interface StudentDialogData {
-  editingUser?: Student;
+  editingStudent?: Student;
 }
 
 @Component({
@@ -24,7 +24,6 @@ export class UserDialogComponent {
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data?: StudentDialogData
   ) {
-
     this.studentForm = this.formBuilder.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
@@ -34,14 +33,15 @@ export class UserDialogComponent {
     this.patchFormValue();
   }
 
-  private get isEditing() {
-    return !!this.data?.editingUser;
+  patchFormValue() {
+    if(this.data?.editingStudent){
+      this.studentForm.patchValue(this.data.editingStudent)
+      console.log(this.data.editingStudent)
+    }
   }
 
-  patchFormValue() {
-    if(this.data?.editingUser) {
-      this.studentForm.patchValue(this.data.editingUser)
-    }
+  private get isEditing() {
+    return !!this.data?.editingStudent;
   }
 
   onAdd(): void {
@@ -50,8 +50,9 @@ export class UserDialogComponent {
     } else {
       this.matDialogRef.close({
         ...this.studentForm.value,
-        id: generateRandomString(5)
-
+        id: this.isEditing
+          ? this.data!.editingStudent!.id 
+          : generateRandomString(5)
       });
     }
   }
