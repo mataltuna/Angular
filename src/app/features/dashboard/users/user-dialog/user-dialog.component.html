@@ -1,1 +1,48 @@
-<p>user-dialog works!</p>
+<h4 mat-dialog-title>Añade un estudiante!</h4>
+<div mat-dialog-content>
+    <!-- STUDENT FORM -->
+    <form id="user-form">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Ej: Juan">
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Ej: Perez">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Ingresa tu correo electronico</mat-label>
+                    <input
+                    matInput
+                    placeholder="Ej: tumail@example.com"
+                    required/>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Curso</mat-label>
+                    <mat-select>
+                        <mat-option value="frontProg">Programación Frontend</mat-option>
+                        <mat-option value="backProg">Programación Backend</mat-option>
+                        <mat-option value="designUx">Diseño UX UI</mat-option>
+                        <mat-option value="marketing">Marketing</mat-option>
+                        <mat-option value="cibersec">Ciberseguridad</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button (click)="onAdd()" mat-button>Añadir</button>
+
+</div>
