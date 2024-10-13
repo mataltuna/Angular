@@ -1,14 +1,15 @@
 <h4 mat-dialog-title>{{data?.editingStudent ? 'Edita al ' : 'Añade un ' }} estudiante </h4>
-<div mat-dialog-content>
+<div mat-dialog-content id="dialogContent">
     <!-- STUDENT FORM -->
     <form id="user-form" [formGroup]="studentForm">
-        <div class="row">
-            <div class="col-6">
+        <div class="row" id="topRow">
+            <div class="col-6 mb-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <input formControlName="firstName" matInput placeholder="Ej: Juan">
                     <mat-error>
-                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
+                        @if(studentForm.get('firstName')?.hasError('required')) { Este campo es requerido }
+                        @else if (studentForm.get('firstName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -17,7 +18,8 @@
                     <mat-label>Apellido</mat-label>
                     <input formControlName="lastName" matInput placeholder="Ej: Perez">
                     <mat-error>
-                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
+                        @if(studentForm.get('lastName')?.hasError('required')) { Este campo es requerido }
+                        @else if (studentForm.get('lastName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -32,7 +34,8 @@
                     placeholder="Ej: tumail@example.com"
                     required/>
                     <mat-error>
-                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
+                        @if(studentForm.get('email')?.hasError('required')) { Este campo es requerido } 
+                        @else if (studentForm.get('email')?.hasError('email')) {Este campo debe tener un formato de correo electronico}
                     </mat-error>
                 </mat-form-field>
             </div>

@@ -14,7 +14,8 @@ interface StudentDialogData {
   styles: `
   #user-form {
     padding: 4px 0;
-  }`
+  }
+  `
 })
 export class UserDialogComponent {
   studentForm: FormGroup;
@@ -25,9 +26,9 @@ export class UserDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data?: StudentDialogData
   ) {
     this.studentForm = this.formBuilder.group({
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      email: [null, [Validators.required]],
+      firstName: [null, [Validators.required, Validators.minLength(3)]],
+      lastName: [null, [Validators.required, Validators.minLength(3)]],
+      email: [null, [Validators.required, Validators.email]],
       courses: [null, [Validators.required]],
     });
     this.patchFormValue();
