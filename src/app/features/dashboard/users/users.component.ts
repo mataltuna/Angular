@@ -69,7 +69,15 @@ export class UsersComponent implements OnInit {
             if(editingStudent) {
               this.handleUpdate(editingStudent.id, result);
             } else {
-              this.dataSource = [...this.dataSource,{ ...result}]
+              this.isLoading = true;
+              this.studentsService.addStudent(result).subscribe({
+                next: (student) => {
+                  this.dataSource = student;
+                },
+                complete: () => {
+                  this.isLoading = false;
+                },
+              });
             }
           }
         }

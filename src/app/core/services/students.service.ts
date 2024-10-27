@@ -24,11 +24,17 @@ export class StudentsService {
     DATABASE = DATABASE.filter((student) => student.id != id);
     return of(DATABASE).pipe(delay(1000));
   }
+
   updateStudById(id: string, update: Partial<Student>) {
     debugger
     DATABASE = DATABASE.map((student) =>
       student.id === id ? { ...student, ...update } : student
     );
+    return of(DATABASE).pipe(delay(1000));
+  }
+
+  addStudent(newStud: Student): Observable<Student[]> {
+    DATABASE.push(newStud);
     return of(DATABASE).pipe(delay(1000));
   }
 }
