@@ -34,15 +34,15 @@ export class UserDialogComponent {
     this.patchFormValue();
   }
 
+  private get isEditing() {
+    return !!this.data?.editingStudent;
+  }
+
   patchFormValue() {
     if(this.data?.editingStudent){
       this.studentForm.patchValue(this.data.editingStudent)
       console.log(this.data.editingStudent)
     }
-  }
-
-  private get isEditing() {
-    return !!this.data?.editingStudent;
   }
 
   onAdd(): void {
