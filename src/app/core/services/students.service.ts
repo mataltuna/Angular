@@ -30,7 +30,6 @@ export class StudentsService {
   }
 
   updateStudById(id: string, update: Partial<Student>) {
-    debugger
     DATABASE = DATABASE.map((student) =>
       student.id === id ? { ...student, ...update } : student
     );
