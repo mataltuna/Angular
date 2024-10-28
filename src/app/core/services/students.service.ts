@@ -29,7 +29,7 @@ export class StudentsService {
     return of(DATABASE).pipe(delay(1000));
   }
 
-  updateStudById(id: string, update: Partial<Student>) {
+  updateStudById(id: string, update: Partial<Student>): Observable<Student[]> {
     DATABASE = DATABASE.map((student) =>
       student.id === id ? { ...student, ...update } : student
     );
