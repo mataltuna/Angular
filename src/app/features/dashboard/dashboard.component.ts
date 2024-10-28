@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +7,5 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent {
   showFiller = false;
-  
-  constructor(private router: Router) {
-  
-  }
-
-  logout(): void {
-    localStorage.removeItem('token')
-    this.router.navigate(['auth', 'login'])
-  }
+  isSidenavOpened = true;
 }

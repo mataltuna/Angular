@@ -1,1 +1,31 @@
-<p>register works!</p>
+<h2>Create una cuenta</h2>
+<form id="loginForm" class="row">
+    <div class="col-12" id="topRow">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Correo electronico</mat-label>
+            <input formControlName="email" matInput placeholder="Ej: Juan">
+            <!--<mat-error>
+                @if(studentForm.get('firstName')?.hasError('required')) { Este campo es requerido }
+                @else if (studentForm.get('firstName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
+            </mat-error>-->
+        </mat-form-field>
+    </div>
+    <div class="col-12">
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input formControlName="password" matInput placeholder="Ej: Perez">
+            <button type="button" matSuffix mat-icon-button>
+                <mat-icon>
+                    visibility
+                </mat-icon>
+            </button>
+            <!--<mat-error>
+                @if(studentForm.get('lastName')?.hasError('required')) { Este campo es requerido }
+                @else if (studentForm.get('lastName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
+            </mat-error>-->
+        </mat-form-field>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="w-90" mat-flat-button>Ingresar</button>
+    </div>
+</form>

@@ -1,31 +1,8 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-        <mat-nav-list>
-            <a
-                routerLinkActive
-                #homeLink="routerLinkActive"
-                routerLink="home"
-                [activated]="homeLink.isActive"
-                mat-list-item
-            >INICIO</a>
-            <a
-                routerLinkActive
-                #usersLink="routerLinkActive"
-                routerLink="users"
-                [activated]="usersLink.isActive"
-                mat-list-item
-            >USUARIOS</a>
-            <a
-                routerLinkActive
-                #homeLink="routerLinkActive"
-                routerLink="home"
-                [activated]="homeLink.isActive"
-                mat-list-item
-            >CURSOS</a>
-            <a (click)="logout()" mat-list-item>CERRAR SESION</a>
-        </mat-nav-list>
+        <app-sidenav id="slidebar"></app-sidenav>
     </mat-drawer>
-
+    
     <div class="example-sidenav-content">
         <mat-toolbar>
             <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">

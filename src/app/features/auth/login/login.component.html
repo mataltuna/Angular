@@ -1,1 +1,28 @@
-<p>login works!</p>
+<h2>Inicia Sesion</h2>
+<form id="loginForm" class="row" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="inpCont col-12">
+        <mat-form-field appearance="outline">
+            <mat-label>Correo electronico</mat-label>
+            <input formControlName="email" matInput placeholder="Ej: example@mail.com">
+            <mat-error>
+                @if(loginForm.get('email')?.hasError('required')) { Este campo es requerido }
+                @else if (loginForm.get('email')?.hasError('email')) { Este campo debe tener 3 caracteres como mínimo }
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="inpCont col-12">
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input formControlName="password" [type]="passwdInpType" matInput placeholder="Escribe">
+            <button type="button" (click)="togglePasswdInpType()" matSuffix mat-icon-button>
+                <mat-icon> visibility </mat-icon>
+            </button>
+            <mat-error>
+                @if(loginForm.get('password')?.hasError('required')) { Este campo es requerido }
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="col-12">
+        <button type="submit" mat-flat-button>Ingresar</button>
+    </div>
+</form>

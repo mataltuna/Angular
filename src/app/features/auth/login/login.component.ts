@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -6,5 +10,42 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  passwdInpType: 'password' | 'text' = 'password'
 
+  loginForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    })
+  }
+
+  togglePasswdInpType(): void {
+    if (this.passwdInpType === 'password'){
+      this.passwdInpType = 'text'
+    } else {
+      this.passwdInpType = 'password'
+    }
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched()
+    } else {
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (result) => {
+
+          this.router.navigate(['dashboard', 'home'])
+        },
+        error: (err) => {
+          console.error(err)
+        }
+      })
+    }
+  }
 }

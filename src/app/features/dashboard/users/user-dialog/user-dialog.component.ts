@@ -26,10 +26,10 @@ export class UserDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data?: StudentDialogData
   ) {
     this.studentForm = this.formBuilder.group({
-      firstName: [null, [Validators.required, Validators.minLength(3)]],
-      lastName: [null, [Validators.required, Validators.minLength(3)]],
-      email: [null, [Validators.required, Validators.email]],
-      courses: [null, [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      courses: ['', [Validators.required]],
     });
     this.patchFormValue();
   }

@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { UserFullNamePipe } from './pipes/user-full-name.pipe';
 
 import { HighlightDirective } from './directives/highlight.directive';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -42,7 +43,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     MatTableModule,
     UserFullNamePipe,
     HighlightDirective,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,24 @@
+<mat-nav-list>
+    <a
+        routerLinkActive
+        #homeLink="routerLinkActive"
+        routerLink="home"
+        [activated]="homeLink.isActive"
+        mat-list-item
+    >INICIO</a>
+    <a
+        routerLinkActive
+        #usersLink="routerLinkActive"
+        routerLink="users"
+        [activated]="usersLink.isActive"
+        mat-list-item
+    >USUARIOS</a>
+    <a
+        routerLinkActive
+        #homeLink="routerLinkActive"
+        routerLink="home"
+        [activated]="homeLink.isActive"
+        mat-list-item
+    >CURSOS</a>
+    <a (click)="logout()" mat-list-item>CERRAR SESION</a>
+</mat-nav-list>
