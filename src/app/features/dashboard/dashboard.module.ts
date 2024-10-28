@@ -5,12 +5,14 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { UsersModule } from './users/users.module';
 import { SharedModule } from '../../shared/shared.module';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    SidenavComponent,
   ],
   imports: [
     CommonModule,

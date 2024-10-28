@@ -2,6 +2,7 @@
     <h2 appHighlight>Usuarios</h2>
     @if (isLoading) {
         <mat-spinner></mat-spinner>
+        <h3>Cargando, por favor espere...</h3>
     } @else {
         <button mat-raised-button (click)="openModal()">
             <mat-icon>add</mat-icon>
@@ -30,6 +31,9 @@
             <ng-container matColumnDef="actions">
                 <th appHighlight mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let student">
+                    <button (click)="goToDetail(student.id)" mat-icon-button>
+                        <mat-icon> visibility </mat-icon>
+                    </button>
                     <button (click)="openModal(student)" mat-icon-button>
                         <mat-icon> edit </mat-icon>
                     </button>

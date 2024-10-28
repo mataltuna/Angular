@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatListModule } from '@angular/material/list';
 
 import { UserFullNamePipe } from './pipes/user-full-name.pipe';
 
@@ -41,6 +42,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     MatTableModule,
     UserFullNamePipe,
     HighlightDirective,
+    MatListModule
   ]
 })
 export class SharedModule { }

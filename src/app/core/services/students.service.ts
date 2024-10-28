@@ -1,6 +1,6 @@
-import { DebugElement, Injectable } from '@angular/core';
-import { Student } from '../../features/dashboard/users/models';
-import { delay, Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Student } from '../../shared/models';
+import { delay, map, Observable, of } from 'rxjs';
 
 let DATABASE: Student[] = [];
 
@@ -10,6 +10,10 @@ let DATABASE: Student[] = [];
 
 export class StudentsService {
   constructor() {}
+
+  getById(id: string): Observable<Student | undefined> {
+    return this.getStudents().pipe(map((users) => users.find((s) => s.id === id)))
+  }
 
   getStudents(): Observable<Student[]> {
     return new Observable((observer) => {
