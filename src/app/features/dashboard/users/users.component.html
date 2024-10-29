@@ -4,12 +4,10 @@
         <mat-spinner></mat-spinner>
         <h3>Cargando, por favor espere...</h3>
     } @else {
-        <button id="btnModal" mat-raised-button (click)="openModal()">
+        <button class="btnModal" mat-raised-button (click)="openModal()">
             <mat-icon>add</mat-icon>
             Añadir estudiante
         </button>
-
-        <!-- TABLA DE USUARIOS -->
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
             <th appHighlight mat-header-cell *matHeaderCellDef> ID. </th>
@@ -41,7 +39,7 @@
                         <mat-icon> delete </mat-icon>
                     </button>
                 </td>
-                </ng-container>
+            </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

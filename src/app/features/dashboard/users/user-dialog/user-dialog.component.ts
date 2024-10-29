@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { generateRandomString } from '../../../../shared/utils';
 import { Student } from '../../../../shared/models';
+import { CoursesService } from '../../../../core/services/courses.service';
+import { Course } from '../../courses/models';
+import { CoursesDialogComponent } from '../../courses/courses-dialog/courses-dialog.component';
 
 interface StudentDialogData {
   editingStudent?: Student;
@@ -19,10 +22,12 @@ interface StudentDialogData {
 })
 export class UserDialogComponent {
   studentForm: FormGroup;
+  courses: Course[] = []
 
   constructor(
-    private matDialogRef: MatDialogRef<UserDialogComponent>,
+    private matDialogRef: MatDialogRef<CoursesDialogComponent>,
     private formBuilder: FormBuilder,
+    private coursesService: CoursesService,
     @Inject(MAT_DIALOG_DATA) public data?: StudentDialogData
   ) {
     this.studentForm = this.formBuilder.group({
@@ -34,6 +39,12 @@ export class UserDialogComponent {
     this.patchFormValue();
   }
 
+  ngOnInit(): void {
+    this.coursesService.getCourses().subscribe((courses) => {
+      this.courses = courses;
+    });
+  }
+
   private get isEditing() {
     return !!this.data?.editingStudent;
   }
@@ -41,7 +52,6 @@ export class UserDialogComponent {
   patchFormValue() {
     if(this.data?.editingStudent){
       this.studentForm.patchValue(this.data.editingStudent)
-      console.log(this.data.editingStudent)
     }
   }
 

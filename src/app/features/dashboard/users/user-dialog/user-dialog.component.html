@@ -2,7 +2,7 @@
 <div mat-dialog-content id="dialogContent">
     <form id="user-form" [formGroup]="studentForm">
         <div class="row" id="topRow">
-            <div class="col-6 mb-3">
+            <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <input formControlName="firstName" matInput placeholder="Ej: Juan">
@@ -42,11 +42,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Curso</mat-label>
                     <mat-select formControlName="courses" multiple>
-                        <mat-option value="Programación Frontend">Programación Frontend</mat-option>
-                        <mat-option value="Programación Backend">Programación Backend</mat-option>
-                        <mat-option value="Diseño UX UI">Diseño UX UI</mat-option>
-                        <mat-option value="Marketing">Marketing</mat-option>
-                        <mat-option value="Ciberseguridad">Ciberseguridad</mat-option>
+                        <mat-option *ngFor="let course of courses" [value]="course.name">{{ course.name }}</mat-option>
                     </mat-select>
                     <mat-error>
                         @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }

@@ -1,0 +1,31 @@
+<h4 mat-dialog-title> Añade un curso </h4>
+<div mat-dialog-content id="dialogContent">
+    <form id="course-form" [formGroup]="courseForm">
+        <div class="row" id="topRow">
+            <div class="col-6 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="name" matInput placeholder="Ej: Diseño UX UI">
+                    <mat-error>
+                        @if(courseForm.get('name')?.hasError('required')) { Este campo es requerido }
+                        @else if (courseForm.get('name')?.hasError('minlength')) { Este campo debe tener 4 caracteres como mínimo }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Cantidad maxima de alumnos</mat-label>
+                    <input type="number" formControlName="maxAlumn" matInput placeholder="Ej: Perez">
+                    <mat-error>
+                        @if(courseForm.get('maxAlumn')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button (click)="onAdd()" mat-button>Añadir</button>
+
+</div>
