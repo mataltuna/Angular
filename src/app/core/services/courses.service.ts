@@ -6,13 +6,13 @@ import { generateRandomString } from "../../shared/utils";
 let COURSES_DB: Course[] = [
     {
         id:generateRandomString(4),
-        name: 'Programacion Frontend',
+        name: 'Programación Frontend',
         createdAt: new Date(),
         maxAlumn: 50
     },
     {
         id:generateRandomString(4),
-        name: 'Programacion Backend',
+        name: 'Programación Backend',
         createdAt: new Date(),
         maxAlumn: 52
     },
@@ -49,9 +49,14 @@ export class CoursesService {
         return of(COURSES_DB).pipe(delay(1000));
     }
 
+    removeCourById(id: string): Observable<Course[]> {
+        COURSES_DB = COURSES_DB.filter((course) => course.id != id);
+        return of(COURSES_DB).pipe(delay(1000));
+    }
+
     updateCourById(id: string, update: Partial<Course>): Observable<Course[]> {
-        COURSES_DB = COURSES_DB.map((student) =>
-            student.id === id ? { ...student, ...update } : student
+        COURSES_DB = COURSES_DB.map((course) =>
+            course.id === id ? { ...course, ...update } : course
         );
         return of(COURSES_DB).pipe(delay(1000));
     }

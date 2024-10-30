@@ -15,9 +15,9 @@ interface StudentDialogData {
   selector: 'app-user-dialog',
   templateUrl: './user-dialog.component.html',
   styles: `
-  #user-form {
-    padding: 4px 0;
-  }
+    #user-form {
+      padding: 4px 0;
+    }
   `
 })
 export class UserDialogComponent {

@@ -15,7 +15,7 @@
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Cantidad maxima de alumnos</mat-label>
-                    <input type="number" formControlName="maxAlumn" matInput placeholder="Ej: Perez">
+                    <input type="number" formControlName="maxAlumn" matInput placeholder="Ej: 30">
                     <mat-error>
                         @if(courseForm.get('maxAlumn')?.hasError('required')) { Este campo es requerido }
                     </mat-error>

@@ -1,37 +1,37 @@
 <div class="contContainer">
-    <!--@if (isLoading) {
+    @if (isLoading) {
         <mat-spinner></mat-spinner>
         <h3>Cargando, por favor espere...</h3>
-    } @else {-->
+    } @else {
         <button class="btnModal" (click)="openModal()" mat-raised-button >
             <mat-icon>add</mat-icon>
             Añadir curso
         </button>
-        <table mat-table [dataSource]="courses" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
             <th appHighlight mat-header-cell *matHeaderCellDef> ID. </th>
             <td mat-cell *matCellDef="let course"> {{ course.id }} </td>
             </ng-container>
             <ng-container matColumnDef="name">
             <th appHighlight mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let courses"> {{ courses.name }} </td>
+            <td mat-cell *matCellDef="let course"> {{ course.name }} </td>
             </ng-container>
             <ng-container matColumnDef="createdAt">
                 <th appHighlight mat-header-cell *matHeaderCellDef> Fecha de creación </th>
-                <td mat-cell *matCellDef="let courses"> {{ courses.createdAt }} </td>
+                <td mat-cell *matCellDef="let course"> {{ course.createdAt | date }} </td>
             </ng-container>
             <ng-container matColumnDef="maxAlumn">
             <th appHighlight mat-header-cell *matHeaderCellDef> Correo electronico </th>
-            <td mat-cell *matCellDef="let courses"> {{ courses.maxAlumn }} </td>
+            <td mat-cell *matCellDef="let course"> {{ course.maxAlumn }} </td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
                 <th appHighlight mat-header-cell *matHeaderCellDef> Acciones </th>
-                <td mat-cell *matCellDef="let student">
-                    <button  mat-icon-button>
+                <td mat-cell *matCellDef="let course">
+                    <button (click)="openModal(course)" mat-icon-button>
                         <mat-icon> edit </mat-icon>
                     </button>
-                    <button  mat-icon-button>
+                    <button (click)="onDelete(course.id)" mat-icon-button>
                         <mat-icon> delete </mat-icon>
                     </button>
                 </td>
@@ -40,5 +40,5 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-    <!--}-->
+    }
 </div>

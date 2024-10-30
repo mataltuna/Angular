@@ -10,7 +10,6 @@ import { CoursesDialogComponent } from './courses-dialog/courses-dialog.componen
   styleUrl: './courses.component.scss'
 })
 export class CoursesComponent implements OnInit{
-  courses: Course[] = []
   dataSource: Course[] = []
   displayedColumns = ['id', 'name', 'maxAlumn', 'createdAt', 'actions']
   isLoading = false
@@ -24,10 +23,33 @@ export class CoursesComponent implements OnInit{
     this.loadCourses()
   }
 
+  onDelete(id: string) {
+    if (confirm('¿Esta seguro de eliminar al estudiante?')) {
+      this.isLoading = true;
+      this.coursesService.removeCourById(id).subscribe({
+        next: (course) => {
+          this.dataSource = course;
+        },
+        error: (err) => {
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
+    }
+  }
+
   loadCourses(): void {
     this.coursesService.getCourses().subscribe({
       next: (courses) => {
-        this.courses = courses
+        this.dataSource = courses
+      },
+      error: () => {
+        this.isLoading = false
+      },
+      complete: () => {
+        this.isLoading = false
       }
     })
   }
@@ -60,6 +82,7 @@ export class CoursesComponent implements OnInit{
         }
       })
   }
+
   handleUpdate(id: string, update: Course): void {
     this.isLoading = true;
     this.coursesService.updateCourById(id, update).subscribe({

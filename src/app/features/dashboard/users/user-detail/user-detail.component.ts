@@ -10,7 +10,6 @@ import { Student } from '../../../../shared/models';
 })
 export class UserDetailComponent implements OnInit {
   idStudent?: string
-
   student?: Student
   isLoading = false
 

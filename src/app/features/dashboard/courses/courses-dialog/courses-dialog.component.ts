@@ -29,6 +29,7 @@ export class CoursesDialogComponent {
       name: ['', [Validators.required, Validators.minLength(4)]],
       maxAlumn: ['', [Validators.required]]
     })
+    this.patchFormValue()
   }
 
   private get isEditing() {
@@ -49,7 +50,10 @@ export class CoursesDialogComponent {
         ...this.courseForm.value,
         id: this.isEditing
           ? this.data!.editingCourse!.id 
-          : generateRandomString(5)
+          : generateRandomString(4),
+        createdAt: this.isEditing
+          ? this.data!.editingCourse!.createdAt
+          : new Date(),
       });
     }
   }
