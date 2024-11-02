@@ -20,7 +20,6 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { MatCardModule } from '@angular/material/card';
 
 
-
 @NgModule({
   declarations: [
     UserFullNamePipe,

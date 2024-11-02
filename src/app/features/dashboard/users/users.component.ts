@@ -4,6 +4,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { StudentsService } from '../../../core/services/students.service';
 import { Student } from '../../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +15,7 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'courses', 'actions'];
   dataSource: Student[] = [];
   isLoading = false;
+
 
   constructor(
     private matDialog: MatDialog,
@@ -41,8 +43,9 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  onDelete(id: string) {
-    if (confirm('¿Esta seguro de eliminar al estudiante?')) {
+  async onDelete(id: string) {
+    const swalResult = await this.showConfirmationDialog("eliminar el alumno");
+    if(swalResult.isConfirmed) {
       this.isLoading = true;
       this.studentsService.removeStudById(id).subscribe({
         next: (student) => {
@@ -72,10 +75,13 @@ export class UsersComponent implements OnInit {
       })
       .afterClosed()
       .subscribe({
-        next: (result) => {
+        next: async (result) => {
           if(!!result) {
             if(editingStudent) {
-              this.handleUpdate(editingStudent.id, result);
+              const swalResult = await this.showConfirmationDialog("guardar los cambios");
+              if(swalResult.isConfirmed) {
+                this.handleUpdate(editingStudent.id, result);
+              }
             } else {
               this.isLoading = true;
               this.studentsService.addStudent(result).subscribe({
@@ -91,6 +97,16 @@ export class UsersComponent implements OnInit {
         }
       })
   }
+
+  async showConfirmationDialog(obj:string) {
+    return await Swal.fire({
+      title: `¿Quieres ${obj}?`,
+      showDenyButton: true,
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`
+    })
+  }
+
   handleUpdate(id: string, update: Student): void {
     this.isLoading = true;
     this.studentsService.updateStudById(id, update).subscribe({
