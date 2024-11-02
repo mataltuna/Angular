@@ -3,6 +3,7 @@ import { CoursesService } from '../../../core/services/courses.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Course } from './models';
 import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-courses',
@@ -23,8 +24,9 @@ export class CoursesComponent implements OnInit{
     this.loadCourses()
   }
 
-  onDelete(id: string) {
-    if (confirm('¿Esta seguro de eliminar al estudiante?')) {
+  async onDelete(id: string) {
+    const swalResult = await this.showConfirmationDialog("eliminar el alumno");
+    if(swalResult.isConfirmed) {
       this.isLoading = true;
       this.coursesService.removeCourById(id).subscribe({
         next: (course) => {
@@ -63,10 +65,13 @@ export class CoursesComponent implements OnInit{
       })
       .afterClosed()
       .subscribe({
-        next: (result) => {
+        next: async (result) => {
           if(!!result) {
             if(editingCourse) {
-              this.handleUpdate(editingCourse.id, result);
+              const swalResult = await this.showConfirmationDialog("guardar los cambios");
+              if(swalResult.isConfirmed) {
+                this.handleUpdate(editingCourse.id, result);
+              }
             } else {
               this.isLoading = true;
               this.coursesService.addCourse(result).subscribe({
@@ -81,6 +86,15 @@ export class CoursesComponent implements OnInit{
           }
         }
       })
+  }
+
+  async showConfirmationDialog(obj:string) {
+    return await Swal.fire({
+      title: `¿Quieres ${obj}?`,
+      showDenyButton: true,
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`
+    })
   }
 
   handleUpdate(id: string, update: Course): void {
