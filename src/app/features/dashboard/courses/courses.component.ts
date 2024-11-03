@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class CoursesComponent implements OnInit{
   dataSource: Course[] = []
-  displayedColumns = ['id', 'name', 'maxAlumn', 'createdAt', 'actions']
+  displayedColumns = ['id', 'name', 'maxStud', 'createdAt', 'actions']
   isLoading = false
 
   constructor(
@@ -22,6 +22,21 @@ export class CoursesComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadCourses()
+  }
+
+  loadCourses(): void {
+    this.isLoading = true;
+    this.coursesService.getCourses().subscribe({
+      next: (courses) => {
+        this.dataSource = courses
+      },
+      error: () => {
+        this.isLoading = false
+      },
+      complete: () => {
+        this.isLoading = false
+      }
+    })
   }
 
   async onDelete(id: string) {
@@ -41,21 +56,6 @@ export class CoursesComponent implements OnInit{
       });
     }
   }
-
-  loadCourses(): void {
-    this.coursesService.getCourses().subscribe({
-      next: (courses) => {
-        this.dataSource = courses
-      },
-      error: () => {
-        this.isLoading = false
-      },
-      complete: () => {
-        this.isLoading = false
-      }
-    })
-  }
-
   openModal(editingCourse?: Course): void {
     this.matDialog
       .open(CoursesDialogComponent, {

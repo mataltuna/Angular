@@ -12,6 +12,8 @@ export class UserDetailComponent implements OnInit {
   idStudent?: string
   student?: Student
   isLoading = false
+  showAllCourses = true;
+  displayedCourses: string[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,7 +29,20 @@ export class UserDetailComponent implements OnInit {
       next: (student) => {
         this.student = student
         this.isLoading = false
+        this.toggleCourseVisibility()
+      },
+      error: () => {
+        this.isLoading = false
       }
     })
+  }
+
+  toggleCourseVisibility() {
+    this.showAllCourses = !this.showAllCourses;
+    this.displayedCourses = this.showAllCourses ? this.student?.courses || [] : this.student?.courses.slice(0, 2) || [];
+  }
+
+  hasMultipleCourses(): boolean {
+    return (this.student?.courses?.length || 0) > 2;
   }
 }

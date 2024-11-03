@@ -8,31 +8,31 @@ let COURSES_DB: Course[] = [
         id:generateRandomString(4),
         name: 'Programación Frontend',
         createdAt: new Date(),
-        maxAlumn: 50
+        maxStud: 50
     },
     {
         id:generateRandomString(4),
         name: 'Programación Backend',
         createdAt: new Date(),
-        maxAlumn: 52
+        maxStud: 52
     },
     {
         id:generateRandomString(4),
         name: 'Diseño UX UI',
         createdAt: new Date(),
-        maxAlumn: 45
+        maxStud: 45
     },
     {
         id:generateRandomString(4),
         name: 'Marketing',
         createdAt: new Date(),
-        maxAlumn: 64
+        maxStud: 64
     },
     {
         id:generateRandomString(4),
         name: 'Ciberseguridad',
         createdAt: new Date(),
-        maxAlumn: 68
+        maxStud: 68
     }
 ]
 

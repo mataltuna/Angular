@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Course } from '../models';
 import { generateRandomString } from '../../../../shared/utils';
@@ -27,11 +27,11 @@ export class CoursesDialogComponent {
   ) {
     this.courseForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      maxAlumn: ['', [Validators.required]]
+      maxStud: ['', [Validators.required, this.maxStudValidator(90)]]
     })
     this.patchFormValue()
   }
-
+  
   private get isEditing() {
     return !!this.data?.editingCourse;
   }
@@ -56,5 +56,15 @@ export class CoursesDialogComponent {
           : new Date(),
       });
     }
+  }
+  
+  maxStudValidator(max: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value && value > max) {
+        return { maxStudExceeded: { max } };
+      }
+      return null;
+    };
   }
 }

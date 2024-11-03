@@ -1,4 +1,4 @@
-<h4 mat-dialog-title> Añade un curso </h4>
+<h4 mat-dialog-title>{{data?.editingCourse ? 'Edita el ' : 'Añade un ' }}curso </h4>
 <div mat-dialog-content id="dialogContent">
     <form id="course-form" [formGroup]="courseForm">
         <div class="row" id="topRow">
@@ -14,10 +14,11 @@
             </div>
             <div class="col-6">
                 <mat-form-field appearance="outline">
-                    <mat-label>Cantidad maxima de alumnos</mat-label>
-                    <input type="number" formControlName="maxAlumn" matInput placeholder="Ej: 30">
+                    <mat-label>Maximo de alumnos</mat-label>
+                    <input type="number" formControlName="maxStud" matInput placeholder="Ej: 30">
                     <mat-error>
-                        @if(courseForm.get('maxAlumn')?.hasError('required')) { Este campo es requerido }
+                        @if(courseForm.get('maxStud')?.hasError('required')) { Este campo es requerido }
+                        @else if (courseForm.get('maxStud')?.hasError('maxStudExceeded')) { Este campo no puede tener más de 90 alumnos }
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -26,6 +27,5 @@
 </div>
 <div mat-dialog-actions>
     <button mat-dialog-close mat-button>Cancelar</button>
-    <button (click)="onAdd()" mat-button>Añadir</button>
-
+    <button (click)="onAdd()" mat-button>{{data?.editingCourse ? 'Editar' : 'Añadir' }}</button>
 </div>

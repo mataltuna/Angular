@@ -12,7 +12,7 @@ export class StudentsService {
   constructor() {}
 
   getById(id: string): Observable<Student | undefined> {
-    return this.getStudents().pipe(map((users) => users.find((s) => s.id === id)))
+    return this.getStudents().pipe(map((student) => student.find((s) => s.id === id)))
   }
 
   getStudents(): Observable<Student[]> {

@@ -54,6 +54,6 @@
 </div>
 <div mat-dialog-actions>
     <button mat-dialog-close mat-button>Cancelar</button>
-    <button (click)="onAdd()" mat-button>Añadir</button>
+    <button (click)="onAdd()" mat-button>{{data?.editingStudent ? 'Editar' : 'Añadir' }}</button>
 
 </div>

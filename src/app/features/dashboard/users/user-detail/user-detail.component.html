@@ -1,15 +1,24 @@
-@if (isLoading) {
-    <mat-spinner></mat-spinner>
-    <h3>Cargando, por favor espere...</h3>
-} @else {
-    <div class="contContainer">
+<div class="contContainer">
+    @if (isLoading) {
+        <div class="loading-msg">
+            <mat-spinner></mat-spinner>
+            <h3>Cargando, por favor espere...</h3>
+        </div>
+    } @else {
         <h1>Detalle del usuario: {{ student?.firstName + ' ' + student?.lastName }}</h1>
         <mat-list role="list">
-            <mat-list-item role="listitem">Id: {{ student?.id }}</mat-list-item>
-            <mat-list-item role="listitem">Correo Electronico: {{ student?.email }}</mat-list-item>
-            <mat-list-item role="listitem">Cursos(actuales): {{ student?.courses }} </mat-list-item>
-            
+            <mat-list-item class="li-ttl" role="listitem"><span>Id:</span> {{ student?.id }}</mat-list-item>
+            <mat-list-item class="li-ttl" role="listitem"><span>Correo Electronico:</span> {{ student?.email }}</mat-list-item>
+            <mat-list-item class="li-ttl" role="listitem"><span>Cursos(actuales):</span></mat-list-item>
+            <mat-list-item *ngFor="let course of displayedCourses" role="listitem">{{ course }}</mat-list-item>
+            <div role="listitem" *ngIf="hasMultipleCourses()" class="demo-section">
+                <button 
+                    mat-raised-button 
+                    (click)="toggleCourseVisibility()" 
+                    [attr.aria-expanded]="showAllCourses">
+                    {{ showAllCourses ? 'Ocultar' : 'Ver más cursos' }}
+                </button>
+            </div>
         </mat-list>
-    </div>
-}
-
+    }
+</div>

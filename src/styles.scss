@@ -40,9 +40,16 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .contContainer {
-  padding: 0 25px;
+  padding: 15px 25px;
 }
 
 .btnModal {
   margin-bottom: 1rem;
+}
+
+.loading-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
