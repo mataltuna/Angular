@@ -63,7 +63,10 @@ export class UserDialogComponent {
         ...this.studentForm.value,
         id: this.isEditing
           ? this.data!.editingStudent!.id 
-          : generateRandomString(5)
+          : generateRandomString(5),
+        token: this.isEditing
+          ? this.data!.editingStudent!.id
+          : generateRandomString(20)
       });
     }
   }

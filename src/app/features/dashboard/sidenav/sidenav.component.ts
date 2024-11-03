@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   @ViewChild('drawer') drawer!: MatDrawer
 
@@ -17,7 +18,6 @@ export class SidenavComponent {
   }
 
   logout(): void {
-    localStorage.removeItem('token')
-    this.router.navigate(['auth', 'login'])
+    this.authService.logout()
   }
 }

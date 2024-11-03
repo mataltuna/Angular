@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -39,13 +40,22 @@ export class LoginComponent {
     } else {
       this.authService.login(this.loginForm.value).subscribe({
         next: (result) => {
-
           this.router.navigate(['dashboard', 'home'])
         },
         error: (err) => {
-          console.error(err)
+          if(err instanceof Error) {
+            this.showError(err.message)
+          }
         }
       })
     }
+  }
+
+  async showError(ErrMsg:string) {
+    return await Swal.fire({
+      icon: "error",
+      title: "Ups...",
+      text: ErrMsg,
+    });
   }
 }
