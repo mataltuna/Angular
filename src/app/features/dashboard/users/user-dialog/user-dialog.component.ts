@@ -6,6 +6,7 @@ import { Student } from '../../../../shared/models';
 import { CoursesService } from '../../../../core/services/courses.service';
 import { Course } from '../../courses/models';
 import { CoursesDialogComponent } from '../../courses/courses-dialog/courses-dialog.component';
+import { Observable } from 'rxjs';
 
 interface StudentDialogData {
   editingStudent?: Student;
@@ -22,7 +23,7 @@ interface StudentDialogData {
 })
 export class UserDialogComponent {
   studentForm: FormGroup;
-  courses: Course[] = []
+  courses$: Observable<Course[]>
 
   constructor(
     private matDialogRef: MatDialogRef<CoursesDialogComponent>,
@@ -36,13 +37,8 @@ export class UserDialogComponent {
       email: ['', [Validators.required, Validators.email]],
       courses: ['', [Validators.required]],
     });
+    this.courses$ = this.coursesService.getCourses()
     this.patchFormValue();
-  }
-
-  ngOnInit(): void {
-    this.coursesService.getCourses().subscribe((courses) => {
-      this.courses = courses;
-    });
   }
 
   private get isEditing() {

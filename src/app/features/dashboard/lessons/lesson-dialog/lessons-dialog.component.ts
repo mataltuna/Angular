@@ -5,6 +5,7 @@ import { generateRandomString } from '../../../../shared/utils';
 import { Lesson } from '../models';
 import { CoursesService } from '../../../../core/services/courses.service';
 import { Course } from '../../courses/models';
+import { Observable } from 'rxjs';
 
 interface LessonDialogData {
   editingLesson?: Lesson;
@@ -21,7 +22,7 @@ interface LessonDialogData {
 })
 export class LessonDialogComponent {
   lessonForm: FormGroup;
-  courses: Course[] = []
+  courses$: Observable<Course[]>
 
   constructor (
     private formBuilder: FormBuilder,
@@ -35,13 +36,8 @@ export class LessonDialogComponent {
       daysLesson: ['', [Validators.required, this.maxOptionsValidator(3)]],
       timeLesson: ['', [Validators.required]]
     })
+    this.courses$ = this.coursesService.getCourses()
     this.patchFormValue()
-  }
-
-  ngOnInit(): void {
-    this.coursesService.getCourses().subscribe((courses) => {
-      this.courses = courses;
-    });
   }
   
   private get isEditing() {

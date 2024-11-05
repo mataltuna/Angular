@@ -42,7 +42,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Curso</mat-label>
                     <mat-select formControlName="courses" multiple>
-                        <mat-option *ngFor="let course of courses" [value]="course.name">{{ course.name }}</mat-option>
+                        <mat-option *ngFor="let course of courses$ | async" [value]="course.name">{{ course.name }}</mat-option>
                     </mat-select>
                     <mat-error>
                         @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
