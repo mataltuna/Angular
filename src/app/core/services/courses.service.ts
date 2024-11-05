@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, delay } from "rxjs";
+import { Observable, of, delay, BehaviorSubject } from "rxjs";
 import { Course } from "../../features/dashboard/courses/models";
 import { generateRandomString } from "../../shared/utils";
 
@@ -39,9 +39,11 @@ let COURSES_DB: Course[] = [
 @Injectable({ providedIn: 'root' })
 
 export class CoursesService {
+    private coursesSubject = new BehaviorSubject<Course[]>([...COURSES_DB]);
+    courses$ = this.coursesSubject.asObservable();
 
     getCourses(): Observable<Course[]> {
-        return of([...COURSES_DB])
+        return this.courses$
     }
 
     addCourse(newCourse: Course): Observable<Course[]> {

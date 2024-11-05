@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CoursesModule } from './courses/courses.module';
 
 const routes: Routes = [
   {
@@ -15,8 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./courses/courses.module').then((r) => r.CoursesModule)
   },
   {
+    path: 'lessons',
+    loadChildren: () => import('./lessons/lessons.module').then((r) => r.LessonsModule)
+  },
+  {
     path: '**',
-    loadChildren: () => import('./home/home.module').then((r) => r.HomeModule)
+    loadChildren: () => import('./not-found/not-found.module').then((r) => r.NotFoundModule)
   }
 ];
 

@@ -1,0 +1,67 @@
+<h4 mat-dialog-title>{{data?.editingLesson ? 'Edita el ' : 'Añade un ' }}curso </h4>
+<div mat-dialog-content id="dialogContent">
+    <form id="lesson-form" [formGroup]="lessonForm">
+        <div class="row">
+            <div class="col-6 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre clase</mat-label>
+                    <input formControlName="name" matInput placeholder="Ej: Servicios y RxJS">
+                    <mat-error>
+                        @if(lessonForm.get('name')?.hasError('required')) { Este campo es requerido }
+                        @else if (lessonForm.get('name')?.hasError('minlength')) { Este campo debe tener 4 caracteres como mínimo }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Curso de la clase</mat-label>
+                    <mat-select formControlName="orgCourse">
+                        <mat-option *ngFor="let course of courses" [value]="course.name">{{ course.name }}</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        @if(lessonForm.get('orgCourse')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Día de cursada</mat-label>
+                    <mat-select formControlName="daysLesson" multiple>
+                        <mat-option value="Lunes"> Lunes </mat-option>
+                        <mat-option value="Martes"> Martes </mat-option>
+                        <mat-option value="Miércoles"> Miércoles </mat-option>
+                        <mat-option value="Jueves"> Jueves </mat-option>
+                        <mat-option value="Viernes"> Viernes </mat-option>
+                        <mat-option value="Sabado"> Sabado </mat-option>
+                        <mat-option value="Domingo"> Domingo </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        @if(lessonForm.get('daysLesson')?.hasError('required')) { Este campo es requerido }
+                        @else if (lessonForm.get('daysLesson')?.hasError('maxOptionsExceeded')) { Hay un maximo de 3 clases semanales }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Horarios de cursada</mat-label>
+                    <mat-select formControlName="timeLesson">
+                        <mat-option value="10"> 10hs </mat-option>
+                        <mat-option value="16"> 16hs </mat-option>
+                        <mat-option value="18"> 18hs </mat-option>
+                        <mat-option value="22"> 22hs </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        @if(lessonForm.get('timeLesson')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button (click)="onAdd()" mat-button>{{data?.editingLesson ? 'Editar' : 'Añadir' }}</button>
+</div>
+

@@ -16,7 +16,6 @@ export class UsersComponent implements OnInit {
   dataSource: Student[] = [];
   isLoading = false;
 
-
   constructor(
     private matDialog: MatDialog,
     private studentsService: StudentsService,

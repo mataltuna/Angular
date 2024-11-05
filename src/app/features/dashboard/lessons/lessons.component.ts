@@ -1,35 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from '../../../core/services/courses.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Course } from './models';
-import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
+import { LessonDialogComponent } from './lesson-dialog/lessons-dialog.component';
+import { LessonService } from '../../../core/services/lesson.service';
+import { Lesson } from './models/index';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrl: './courses.component.scss'
+  selector: 'app-lessons',
+  templateUrl: './lessons.component.html',
+  styleUrl: './lessons.component.scss'
 })
-export class CoursesComponent implements OnInit{
-  dataSource: Course[] = []
-  displayedColumns = ['id', 'name', 'maxStud', 'createdAt', 'actions']
+export class LessonsComponent implements OnInit {
+  dataSource: Lesson[] = []
+  displayedColumns = ['id', 'name', 'createdAt', 'orgCourse', 'daysLesson', 'timeLesson', 'actions']
   isLoading = false
 
   constructor(
-    private coursesService: CoursesService,
+    private lessonService: LessonService,
     private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.loadCourses()
+    this.loadLessons()
   }
 
-  loadCourses(): void {
+  loadLessons(): void {
     this.isLoading = true;
-    this.coursesService.courses$.subscribe({
-      next: (courses) => {
-        this.dataSource = courses
-        this.isLoading = false
+    this.lessonService.getLessons().subscribe({
+      next: (lesson) => {
+        this.dataSource = lesson
       },
       error: () => {
         this.isLoading = false
@@ -44,9 +43,9 @@ export class CoursesComponent implements OnInit{
     const swalResult = await this.showConfirmationDialog("eliminar el alumno");
     if(swalResult.isConfirmed) {
       this.isLoading = true;
-      this.coursesService.removeCourById(id).subscribe({
-        next: (course) => {
-          this.dataSource = course;
+      this.lessonService.removeLessonById(id).subscribe({
+        next: (lesson) => {
+          this.dataSource = lesson;
         },
         error: (err) => {
           this.isLoading = false;
@@ -57,27 +56,27 @@ export class CoursesComponent implements OnInit{
       });
     }
   }
-  openModal(editingCourse?: Course): void {
+  openModal(editingLesson?: Lesson): void {
     this.matDialog
-      .open(CoursesDialogComponent, {
+      .open(LessonDialogComponent, {
         data: {
-          editingCourse
+          editingLesson
         }
       })
       .afterClosed()
       .subscribe({
         next: async (result) => {
           if(!!result) {
-            if(editingCourse) {
+            if(editingLesson) {
               const swalResult = await this.showConfirmationDialog("guardar los cambios");
               if(swalResult.isConfirmed) {
-                this.handleUpdate(editingCourse.id, result);
+                this.handleUpdate(editingLesson.id, result);
               }
             } else {
               this.isLoading = true;
-              this.coursesService.addCourse(result).subscribe({
-                next: (course) => {
-                  this.dataSource = course;
+              this.lessonService.addLesson(result).subscribe({
+                next: (lesson) => {
+                  this.dataSource = lesson;
                 },
                 complete: () => {
                   this.isLoading = false;
@@ -98,11 +97,11 @@ export class CoursesComponent implements OnInit{
     })
   }
 
-  handleUpdate(id: string, update: Course): void {
+  handleUpdate(id: string, update: Lesson): void {
     this.isLoading = true;
-    this.coursesService.updateCourById(id, update).subscribe({
-      next: (course) => {
-        this.dataSource = course;
+    this.lessonService.updateLessonById(id, update).subscribe({
+      next: (lesson) => {
+        this.dataSource = lesson;
       },
       error: (err) => {
         this.isLoading = false;
@@ -112,5 +111,4 @@ export class CoursesComponent implements OnInit{
       },
     });
   }
-
 }

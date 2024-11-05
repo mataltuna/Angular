@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    loadChildren: () => import('./features/dashboard/not-found/not-found.module').then((r) => r.NotFoundModule)
+    redirectTo: 'auth'
   }
 ];
 

@@ -1,0 +1,55 @@
+<div id="users-container" class="contContainer">
+    <h2 appHighlight>Clases</h2>
+    @if (isLoading) {
+        <div class="loading-msg">
+            <mat-spinner></mat-spinner>
+            <h3>Cargando, por favor espere...</h3>
+        </div>
+    } @else {
+        <button class="btnModal" mat-raised-button (click)="openModal()">
+            <mat-icon>add</mat-icon>
+            Añadir clase
+        </button>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+            <th appHighlight mat-header-cell *matHeaderCellDef> ID. </th>
+            <td mat-cell *matCellDef="let lesson"> {{ lesson.id }} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+            <th appHighlight mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let lesson"> {{ lesson.name }} </td>
+            </ng-container>
+            <ng-container matColumnDef="createdAt">
+            <th appHighlight mat-header-cell *matHeaderCellDef> Fecha de creación </th>
+            <td mat-cell *matCellDef="let lesson"> {{ lesson.createdAt | date }} </td>
+            </ng-container>
+            <ng-container matColumnDef="orgCourse">
+            <th appHighlight mat-header-cell *matHeaderCellDef> Curso </th>
+            <td mat-cell *matCellDef="let lesson"> {{ lesson.orgCourse }} </td>
+            </ng-container>
+            <ng-container matColumnDef="daysLesson">
+                <th appHighlight mat-header-cell *matHeaderCellDef> Días de clase </th>
+                <td mat-cell *matCellDef="let lesson"> {{ lesson.daysLesson }} </td>
+            </ng-container>
+            <ng-container matColumnDef="timeLesson">
+                <th appHighlight mat-header-cell *matHeaderCellDef> Horarios </th>
+                <td mat-cell *matCellDef="let lesson"> {{ lesson.timeLesson }}hs </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th appHighlight mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let lesson">
+                    <button (click)="openModal(lesson)" mat-icon-button>
+                        <mat-icon> edit </mat-icon>
+                    </button>
+                    <button (click)="onDelete(lesson.id)" mat-icon-button>
+                        <mat-icon> delete </mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    }
+</div>
