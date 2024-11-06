@@ -1,38 +1,45 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of, throwError } from "rxjs";
+import { BehaviorSubject, map, Observable, throwError } from "rxjs";
 import { AuthData } from "../../features/auth/models";
-import { generateRandomString } from "../../shared/utils";
 import { Student } from '../../shared/models/index';
 import { Router } from '@angular/router';
-import { THREE } from "@angular/cdk/keycodes";
-
-const ADM_USER: Student = {
-    email: 'admin@gmail.com',
-    firstName: 'Admin',
-    lastName: 'Admin',
-    password: 'admin1405',
-    id: generateRandomString(4),
-    token: 'iNidJDfL9nEnhIz49E0o',
-    courses: []
-}
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
 
 @Injectable({providedIn:'root'})
 export class AuthService {
 
     private _authUser$ = new BehaviorSubject<null | Student>(null);
+    
     public authUser$ = this._authUser$.asObservable();
+    
+    private baseURL = environment.apiBaseURL
 
-    constructor(private router:Router){}
+    constructor(
+        private router:Router,
+        private httpClient:HttpClient
+    ){}
+
+    private handleAuthentication(users: Student[]): Student | null {
+        if(!!users[0]) {
+            this._authUser$.next(users[0])
+            localStorage.setItem('token', users[0].token)
+            return users[0]
+        } else {
+            return null
+        }
+    }
 
     login(data: AuthData): Observable<Student> {
-        if (data.email != ADM_USER.email || data.password != ADM_USER.password) {
-            return throwError(() => new Error('Los datos son invalidos'))
-        }
-        this._authUser$.next(ADM_USER)
-
-        localStorage.setItem('token', ADM_USER.token)
-
-        return of(ADM_USER)
+        return this.httpClient.get<Student[]>(`${this.baseURL}/users?email=${data.email}&password=${data.password}`)
+            .pipe(map((users) => {
+                const user = this.handleAuthentication(users)
+                if(user) {
+                    return user;
+                } else {
+                    throw throwError(() => new Error('Los datos son invalidos'))
+                }
+            }))
     }
 
     logout() {
@@ -42,12 +49,13 @@ export class AuthService {
     }
 
     verifyTok(): Observable<boolean> {
-        const isValid = localStorage.getItem('token') === ADM_USER.token;
-        if (isValid) {
-            this._authUser$.next(ADM_USER)
-        } else {
-            this._authUser$.next(null)
-        }
-        return of(isValid)
+        return this.httpClient
+        .get<Student[]>(`${this.baseURL}/users?token=${localStorage.getItem('token')}`
+        )
+        .pipe(
+            map((users) => {
+            const user = this.handleAuthentication(users)
+            return !!user
+        }))
     }
 }

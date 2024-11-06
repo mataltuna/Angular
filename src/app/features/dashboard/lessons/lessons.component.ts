@@ -74,19 +74,14 @@ export class LessonsComponent implements OnInit {
               }
             } else {
               this.isLoading = true;
-              this.lessonService.addLesson(result).subscribe({
-                next: (lesson) => {
-                  this.dataSource = lesson;
-                },
-                complete: () => {
-                  this.isLoading = false;
-                },
-              });
+              this.lessonService
+              .createLesson(result)
+              .subscribe({next: () => this.loadLessons()})
             }
           }
         }
       })
-  }
+    }
 
   async showConfirmationDialog(obj:string) {
     return await Swal.fire({

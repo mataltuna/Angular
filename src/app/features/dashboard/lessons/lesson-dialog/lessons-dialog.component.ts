@@ -58,7 +58,7 @@ export class LessonDialogComponent {
         ...this.lessonForm.value,
         id: this.isEditing
           ? this.data!.editingLesson!.id 
-          : generateRandomString(6),
+          : generateRandomString(4),
         createdAt: this.isEditing
           ? this.data!.editingLesson!.createdAt
           : new Date(),

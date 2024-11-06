@@ -83,14 +83,9 @@ export class UsersComponent implements OnInit {
               }
             } else {
               this.isLoading = true;
-              this.studentsService.addStudent(result).subscribe({
-                next: (student) => {
-                  this.dataSource = student;
-                },
-                complete: () => {
-                  this.isLoading = false;
-                },
-              });
+              this.studentsService
+              .createStudent(result)
+              .subscribe({next: () => this.loadStuds()})
             }
           }
         }

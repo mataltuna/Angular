@@ -1,43 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../../shared/models';
-import { delay, map, Observable, of } from 'rxjs';
-
-let DATABASE: Student[] = [];
+import { concatMap, delay, map, Observable, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class StudentsService {
-  constructor() {}
+  private baseURL = environment.apiBaseURL
+
+  constructor(private httpsClient: HttpClient) {}
 
   getById(id: string): Observable<Student | undefined> {
-    return this.getStudents().pipe(map((student) => student.find((s) => s.id === id)))
+    return this.httpsClient.get<Student>(`${this.baseURL}/users/${id}`)
   }
 
   getStudents(): Observable<Student[]> {
-    return new Observable((observer) => {
-      setInterval(() => {
-        observer.next(DATABASE);
-        observer.complete();
-      }, 3000);
-    });
+    return this.httpsClient.get<Student[]>(`${this.baseURL}/users?role=USER`)
   }
 
   removeStudById(id: string): Observable<Student[]> {
-    DATABASE = DATABASE.filter((student) => student.id != id);
-    return of(DATABASE).pipe(delay(1000));
+    return this.httpsClient
+    .delete<Student>(`${this.baseURL}/users/${id}`)
+    .pipe(concatMap(() => this.getStudents()))
   }
 
-  updateStudById(id: string, update: Partial<Student>): Observable<Student[]> {
-    DATABASE = DATABASE.map((student) =>
-      student.id === id ? { ...student, ...update } : student
-    );
-    return of(DATABASE).pipe(delay(1000));
+  createStudent(data: Omit<Student, 'id'>): Observable<Student> {
+    return this.httpsClient.post<Student>(`${this.baseURL}/users`, {
+      ...data
+    })
   }
 
-  addStudent(newStud: Student): Observable<Student[]> {
-    DATABASE.push(newStud);
-    return of(DATABASE).pipe(delay(1000));
+  updateStudById(id: string, update: Partial<Student>) {
+    return this.httpsClient
+    .patch<Student>(`${this.baseURL}/users/${id}`, update)
+    .pipe(concatMap(() => this.getStudents()))
   }
 }

@@ -26,10 +26,9 @@ export class CoursesComponent implements OnInit{
 
   loadCourses(): void {
     this.isLoading = true;
-    this.coursesService.courses$.subscribe({
+    this.coursesService.getCourses().subscribe({
       next: (courses) => {
         this.dataSource = courses
-        this.isLoading = false
       },
       error: () => {
         this.isLoading = false
@@ -75,14 +74,9 @@ export class CoursesComponent implements OnInit{
               }
             } else {
               this.isLoading = true;
-              this.coursesService.addCourse(result).subscribe({
-                next: (course) => {
-                  this.dataSource = course;
-                },
-                complete: () => {
-                  this.isLoading = false;
-                },
-              });
+              this.coursesService
+              .createCourse(result)
+              .subscribe({next: () => this.loadCourses()})
             }
           }
         }

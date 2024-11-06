@@ -4,6 +4,7 @@ export interface Student {
     lastName: string;
     email: string;
     password: string;
+    role: "ADMIN"| "USER";
     token: string;
     courses: string[]
 }

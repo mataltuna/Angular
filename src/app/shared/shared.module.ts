@@ -48,4 +48,6 @@ import { MatCardModule } from '@angular/material/card';
     MatBadgeModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  
+}

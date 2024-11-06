@@ -1,0 +1,61 @@
+{
+  "users": [
+    {
+      "id": "6sd4",
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "email": "admin@gmail.com",
+      "password": "admin1405",
+      "role": "ADMIN",
+      "token": "iNidJDfL9nEnhIz49E0o",
+      "courses": []
+    },
+    {
+      "id": "yy9E4",
+      "firstName": "Mati",
+      "lastName": "Altuna",
+      "email": "altunamaty@gmail.com",
+      "courses": [
+        "Programación Frontend",
+        "Programación Backend",
+        "Diseño UX UI"
+      ],
+      "role": "USER",
+      "password": "123456",
+      "token": "yy9E4"
+    }
+  ],
+  "courses": [
+    {
+      "id": "de98",
+      "name": "Programación Frontend",
+      "createdAt": "2024-11-05T22:03:33.947Z",
+      "maxStud": 50
+    },
+    {
+      "id": "4qe3",
+      "name": "Programación Backend",
+      "createdAt": "2024-11-05T22:03:33.947Z",
+      "maxStud": 52
+    },
+    {
+      "id": "mt5c",
+      "name": "Diseño UX UI",
+      "createdAt": "2024-11-05T22:03:33.947Z",
+      "maxStud": 45
+    },
+    {
+      "id": "p2h6",
+      "name": "Marketing",
+      "createdAt": "2024-11-05T22:03:33.947Z",
+      "maxStud": 64
+    },
+    {
+      "id": "fr45",
+      "name": "Ciberseguridad",
+      "createdAt": "2024-11-05T22:03:33.947Z",
+      "maxStud": 68
+    }
+  ],
+  "lessons": []
+}

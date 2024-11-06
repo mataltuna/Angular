@@ -26,15 +26,13 @@
         <div class="row">
             <div class="col-6">
                 <mat-form-field appearance="outline">
-                    <mat-label>Ingresa tu correo electronico</mat-label>
-                    <input
-                    formControlName="email"
-                    matInput
-                    placeholder="Ej: tumail@example.com"
-                    required/>
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="role">
+                        <mat-option value="USER"> Usuario </mat-option>
+                        <mat-option value="ADMIN"> Admin </mat-option>
+                    </mat-select>
                     <mat-error>
-                        @if(studentForm.get('email')?.hasError('required')) { Este campo es requerido } 
-                        @else if (studentForm.get('email')?.hasError('email')) {Este campo debe tener un formato de correo electronico}
+                        @if(studentForm.get('role')?.hasError('required')) { Este campo es requerido }
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -49,6 +47,35 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo electronico</mat-label>
+                    <input
+                    formControlName="email"
+                    matInput
+                    placeholder="Ej: tumail@example.com"
+                    required/>
+                    <mat-error>
+                        @if(studentForm.get('email')?.hasError('required')) { Este campo es requerido } 
+                        @else if (studentForm.get('email')?.hasError('email')) {Este campo debe tener un formato de correo electronico}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6 passwd-input">
+                <mat-form-field appearance="outline" id="passwd-user" class="d-flex ">
+                    <mat-label>Contraseña</mat-label>
+                    <input formControlName="password" [type]="passwdInpType" matInput placeholder="Escribe">
+                    <button id="passwd-btn" type="button" (click)="togglePasswdInpType()" matSuffix mat-icon-button>
+                        <mat-icon> visibility </mat-icon>
+                    </button>
+                    <mat-error>
+                        @if(studentForm.get('password')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
         </div>
     </form>
 </div>

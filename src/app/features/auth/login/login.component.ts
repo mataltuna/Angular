@@ -4,7 +4,6 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +11,6 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   passwdInpType: 'password' | 'text' = 'password'
-
   loginForm: FormGroup;
 
   constructor(
@@ -34,11 +32,8 @@ export class LoginComponent {
     }
   }
 
-  onSubmit(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched()
-    } else {
-      this.authService.login(this.loginForm.value).subscribe({
+  doLogin() {
+    this.authService.login(this.loginForm.value).subscribe({
         next: (result) => {
           this.router.navigate(['dashboard', 'home'])
         },
@@ -47,7 +42,14 @@ export class LoginComponent {
             this.showError(err.message)
           }
         }
-      })
+    })
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched()
+    } else {
+      this.doLogin()
     }
   }
 

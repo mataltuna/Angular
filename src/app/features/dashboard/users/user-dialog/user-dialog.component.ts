@@ -18,10 +18,15 @@ interface StudentDialogData {
   styles: `
     #user-form {
       padding: 4px 0;
+      #passwd-user {
+        max-width: 212px;
+      }
     }
+
   `
 })
 export class UserDialogComponent {
+  passwdInpType: 'password' | 'text' = 'password'
   studentForm: FormGroup;
   courses$: Observable<Course[]>
 
@@ -36,6 +41,8 @@ export class UserDialogComponent {
       lastName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       courses: ['', [Validators.required]],
+      role: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
     this.courses$ = this.coursesService.getCourses()
     this.patchFormValue();
@@ -64,6 +71,14 @@ export class UserDialogComponent {
           ? this.data!.editingStudent!.id
           : generateRandomString(20)
       });
+    }
+  }
+
+  togglePasswdInpType(): void {
+    if (this.passwdInpType === 'password'){
+      this.passwdInpType = 'text'
+    } else {
+      this.passwdInpType = 'password'
     }
   }
 }

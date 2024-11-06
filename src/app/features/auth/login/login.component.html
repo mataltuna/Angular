@@ -6,7 +6,7 @@
             <input formControlName="email" matInput placeholder="Ej: example@mail.com">
             <mat-error>
                 @if(loginForm.get('email')?.hasError('required')) { Este campo es requerido }
-                @else if (loginForm.get('email')?.hasError('email')) { Este campo debe tener 3 caracteres como mínimo }
+                @else if (loginForm.get('email')?.hasError('email')) { Este campo debe ser un correo electronico valido }
             </mat-error>
         </mat-form-field>
     </div>
