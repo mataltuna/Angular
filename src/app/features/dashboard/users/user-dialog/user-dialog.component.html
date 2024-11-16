@@ -26,18 +26,6 @@
         <div class="row">
             <div class="col-6">
                 <mat-form-field appearance="outline">
-                    <mat-label>Rol</mat-label>
-                    <mat-select formControlName="role">
-                        <mat-option value="USER"> Usuario </mat-option>
-                        <mat-option value="ADMIN"> Admin </mat-option>
-                    </mat-select>
-                    <mat-error>
-                        @if(studentForm.get('role')?.hasError('required')) { Este campo es requerido }
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-6">
-                <mat-form-field appearance="outline">
                     <mat-label>Curso</mat-label>
                     <mat-select formControlName="courses" multiple>
                         <mat-option *ngFor="let course of courses$ | async" [value]="course.name">{{ course.name }}</mat-option>
@@ -47,8 +35,6 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row">
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Correo electronico</mat-label>
@@ -63,19 +49,6 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-6 passwd-input">
-                <mat-form-field appearance="outline" id="passwd-user" class="d-flex ">
-                    <mat-label>Contraseña</mat-label>
-                    <input formControlName="password" [type]="passwdInpType" matInput placeholder="Escribe">
-                    <button id="passwd-btn" type="button" (click)="togglePasswdInpType()" matSuffix mat-icon-button>
-                        <mat-icon> visibility </mat-icon>
-                    </button>
-                    <mat-error>
-                        @if(studentForm.get('password')?.hasError('required')) { Este campo es requerido }
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            
         </div>
     </form>
 </div>

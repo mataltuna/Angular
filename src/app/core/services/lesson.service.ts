@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, delay, concatMap } from "rxjs";
-import { Lesson } from '../../features/dashboard/lessons/models/index';
+import { Observable, concatMap } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
+import { Lesson } from "../../shared/models";
 
 let CLASSES_DB: Lesson[] = []
 

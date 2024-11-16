@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../../core/services/courses.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Course } from './models';
 import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
 import Swal from 'sweetalert2';
+import { Course } from '../../../shared/models';
 
 @Component({
   selector: 'app-courses',

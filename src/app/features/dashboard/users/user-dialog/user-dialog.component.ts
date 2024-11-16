@@ -2,9 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { generateRandomString } from '../../../../shared/utils';
-import { Student } from '../../../../shared/models';
+import { Course, Student } from '../../../../shared/models';
 import { CoursesService } from '../../../../core/services/courses.service';
-import { Course } from '../../courses/models';
 import { CoursesDialogComponent } from '../../courses/courses-dialog/courses-dialog.component';
 import { Observable } from 'rxjs';
 
@@ -18,8 +17,8 @@ interface StudentDialogData {
   styles: `
     #user-form {
       padding: 4px 0;
-      #passwd-user {
-        max-width: 212px;
+      #topRow {
+        margin-bottom: 5px;
       }
     }
 
@@ -40,9 +39,7 @@ export class UserDialogComponent {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      courses: ['', [Validators.required]],
-      role: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      courses: ['', [Validators.required]]
     });
     this.courses$ = this.coursesService.getCourses()
     this.patchFormValue();
@@ -64,9 +61,6 @@ export class UserDialogComponent {
     } else {
       this.matDialogRef.close({
         ...this.studentForm.value,
-        id: this.isEditing
-          ? this.data!.editingStudent!.id 
-          : generateRandomString(5),
         token: this.isEditing
           ? this.data!.editingStudent!.id
           : generateRandomString(20)

@@ -1,3 +1,9 @@
-.inpCont mat-form-field {
-    width: 100%;
+.inpCont{
+    width: 500px;
+    mat-form-field {
+        width: 100%;
+    }
+} 
+#action-cont {
+    gap: 0.25rem;
 }

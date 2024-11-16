@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LessonDialogComponent } from './lesson-dialog/lessons-dialog.component';
 import { LessonService } from '../../../core/services/lesson.service';
-import { Lesson } from './models/index';
 import Swal from 'sweetalert2';
+import { Lesson } from '../../../shared/models';
 
 @Component({
   selector: 'app-lessons',

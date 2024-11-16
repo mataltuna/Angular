@@ -5,6 +5,7 @@ import { StudentsService } from '../../../core/services/students.service';
 import { Student } from '../../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -15,6 +16,9 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'courses', 'actions'];
   dataSource: Student[] = [];
   isLoading = false;
+  isAdmin: boolean = false;
+  user: string | null = null;
+  authService!: AuthService;
 
   constructor(
     private matDialog: MatDialog,
@@ -25,6 +29,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadStuds();
+    /*this.authService.authUser$.subscribe((user) => {
+      this.user = user?.role || null;  // Asume que el `User` tiene una propiedad `role`
+    });*/
   }
 
   loadStuds(): void {

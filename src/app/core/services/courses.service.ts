@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, delay, BehaviorSubject, concatMap } from "rxjs";
-import { Course } from "../../features/dashboard/courses/models";
+import { Observable, concatMap } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
+import { Course } from "../../shared/models";
 
 @Injectable({ providedIn: 'root' })
 

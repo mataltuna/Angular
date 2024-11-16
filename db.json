@@ -7,22 +7,7 @@
       "email": "admin@gmail.com",
       "password": "admin1405",
       "role": "ADMIN",
-      "token": "iNidJDfL9nEnhIz49E0o",
-      "courses": []
-    },
-    {
-      "id": "yy9E4",
-      "firstName": "Mati",
-      "lastName": "Altuna",
-      "email": "altunamaty@gmail.com",
-      "courses": [
-        "Programación Frontend",
-        "Programación Backend",
-        "Diseño UX UI"
-      ],
-      "role": "USER",
-      "password": "123456",
-      "token": "yy9E4"
+      "token": "iNidJDfL9nEnhIz49E0o"
     }
   ],
   "courses": [
@@ -57,5 +42,6 @@
       "maxStud": 68
     }
   ],
-  "lessons": []
+  "lessons": [],
+  "students": []
 }

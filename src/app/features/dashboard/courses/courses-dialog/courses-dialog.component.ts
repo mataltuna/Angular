@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Course } from '../models';
 import { generateRandomString } from '../../../../shared/utils';
+import { Course } from '../../../../shared/models';
 
 interface CourseDialogData {
   editingCourse?: Course;

@@ -2,10 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { generateRandomString } from '../../../../shared/utils';
-import { Lesson } from '../models';
 import { CoursesService } from '../../../../core/services/courses.service';
-import { Course } from '../../courses/models';
 import { Observable } from 'rxjs';
+import { Course, Lesson } from '../../../../shared/models';
 
 interface LessonDialogData {
   editingLesson?: Lesson;

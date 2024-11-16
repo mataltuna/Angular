@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, Observable, throwError } from "rxjs";
-import { AuthData } from "../../features/auth/models";
-import { Student } from '../../shared/models/index';
+import { BehaviorSubject, map, Observable} from "rxjs";
+import { AuthData, User } from '../../shared/models/index';
 import { Router } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
@@ -9,10 +8,8 @@ import { environment } from "../../../environments/environment";
 @Injectable({providedIn:'root'})
 export class AuthService {
 
-    private _authUser$ = new BehaviorSubject<null | Student>(null);
-    
+    private _authUser$ = new BehaviorSubject<null | User>(null);
     public authUser$ = this._authUser$.asObservable();
-    
     private baseURL = environment.apiBaseURL
 
     constructor(
@@ -20,7 +17,7 @@ export class AuthService {
         private httpClient:HttpClient
     ){}
 
-    private handleAuthentication(users: Student[]): Student | null {
+    private handleAuthentication(users: User[]): User | null {
         if(!!users[0]) {
             this._authUser$.next(users[0])
             localStorage.setItem('token', users[0].token)
@@ -30,14 +27,14 @@ export class AuthService {
         }
     }
 
-    login(data: AuthData): Observable<Student> {
-        return this.httpClient.get<Student[]>(`${this.baseURL}/users?email=${data.email}&password=${data.password}`)
+    login(data: AuthData): Observable<User> {
+        return this.httpClient.get<User[]>(`${this.baseURL}/users?email=${data.email}&password=${data.password}`)
             .pipe(map((users) => {
                 const user = this.handleAuthentication(users)
                 if(user) {
                     return user;
                 } else {
-                    throw throwError(() => new Error('Los datos son invalidos'))
+                    throw new Error('Los datos son invalidos')
                 }
             }))
     }
@@ -50,7 +47,7 @@ export class AuthService {
 
     verifyTok(): Observable<boolean> {
         return this.httpClient
-        .get<Student[]>(`${this.baseURL}/users?token=${localStorage.getItem('token')}`
+        .get<User[]>(`${this.baseURL}/users?token=${localStorage.getItem('token')}`
         )
         .pipe(
             map((users) => {

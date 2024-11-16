@@ -60,4 +60,9 @@ export class LoginComponent {
       text: ErrMsg,
     });
   }
+  goToRegister() {
+    this.router.navigate(['auth', 'register'])
+  }
 }
+
+

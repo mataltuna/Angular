@@ -1,5 +1,5 @@
 <div id="users-container" class="contContainer">
-    <h2 appHighlight>Usuarios</h2>
+    <h2 appHighlight>Alumnos</h2>
     @if (isLoading) {
         <div class="loading-msg">
             <mat-spinner></mat-spinner>
@@ -8,7 +8,7 @@
     } @else {
         <button class="btnModal" mat-raised-button (click)="openModal()">
             <mat-icon>add</mat-icon>
-            Añadir estudiante
+            Añadir alumno
         </button>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
