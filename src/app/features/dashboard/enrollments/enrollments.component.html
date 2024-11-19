@@ -11,7 +11,8 @@
             <mat-error>
                 @if(enrollForm.get('studId')?.hasError('required')) { Este campo es requerido }
             </mat-error>
-        </mat-form-field><mat-form-field appearance="outline">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Curso</mat-label>
             <mat-select formControlName="courseId">
                 <mat-option *ngFor="let course of coursesOpts$ | async" [value]="course.id"> 

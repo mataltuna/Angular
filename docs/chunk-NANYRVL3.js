@@ -1,0 +1,1 @@
+import{ya as i}from"./chunk-THA4BGIW.js";var a=class e{transform(r,...t){return r.firstName+" "+r.lastName}static \u0275fac=function(t){return new(t||e)};static \u0275pipe=i({name:"userFullName",type:e,pure:!0})};export{a};
