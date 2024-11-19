@@ -43,5 +43,26 @@
     }
   ],
   "lessons": [],
-  "students": []
+  "students": [
+    {
+      "id": "8768",
+      "firstName": "Juan",
+      "lastName": "Perez",
+      "email": "juanPe@gmail.com",
+      "courses": [
+        "Programación Frontend"
+      ],
+      "token": "fBm6bSLfS4wmefQ2V323"
+    },
+    {
+      "id": "d4a4",
+      "firstName": "Pedro",
+      "lastName": "Sanchez",
+      "email": "sanchPedri@gmail.com",
+      "courses": [
+        "Ciberseguridad"
+      ],
+      "token": "fhV7PRkq15WE6Wph7Tfj"
+    }
+  ]
 }

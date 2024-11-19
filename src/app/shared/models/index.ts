@@ -3,7 +3,8 @@ export interface Student {
     firstName: string;
     lastName: string;
     email: string;
-    courses: string[]
+    courses: string[];
+    token: string;
 }
 
 export interface AuthData {
@@ -35,4 +36,12 @@ export interface User {
     password: string;
     role: "ADMIN"| "USER"
     token: string;
+}
+
+export interface Enrollment {
+    id: string,
+    studId: string,
+    courseId: string,
+    stud?: Student,
+    cours?: Course
 }

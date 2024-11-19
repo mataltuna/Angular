@@ -1,0 +1,31 @@
+<div class="contContainer">
+    <h2 appHighlight>Inscripciones</h2>
+    <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Alumnos</mat-label>
+            <mat-select formControlName="studId">
+                <mat-option *ngFor="let student of studOpts$ | async" [value]="student.id"> 
+                    {{ student | userFullName }}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                @if(enrollForm.get('studId')?.hasError('required')) { Este campo es requerido }
+            </mat-error>
+        </mat-form-field><mat-form-field appearance="outline">
+            <mat-label>Curso</mat-label>
+            <mat-select formControlName="courseId">
+                <mat-option *ngFor="let course of coursesOpts$ | async" [value]="course.id"> 
+                    {{ course.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                @if(enrollForm.get('courseId')?.hasError('required')) { Este campo es requerido }
+            </mat-error> 
+        </mat-form-field>
+        <button type="submit" mat-flat-button>Inscribir</button>
+    </form>
+
+    <div>
+        <pre>{{ enrollments$ | async | json }}</pre>
+    </div>
+</div>

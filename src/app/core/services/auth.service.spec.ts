@@ -68,7 +68,7 @@ describe('AuthService', () => {
         service.login(mockAuthData).subscribe({
             error: (err) => {
                 expect(err).toBeInstanceOf(Error)
-                expect(err['message']).toBe('Los datos son invalidos')
+                expect(err.message).toBe('Los datos son invalidos')
                 done()
             }
         })
@@ -80,25 +80,26 @@ describe('AuthService', () => {
         mockReq.flush([], {status: 401, statusText: 'Unauthorized'})
     })
 
-    /*it('Logout debe remover el token de Localstorage', (done) => {
+    it('Logout debe remover el token de Localstorage', (done) => {
         service.login(mockAuthData).subscribe()
         const mockReq = httpControler.expectOne({
             url: `${service['baseURL']}/users?email=${mockAuthData.email}&password=${mockAuthData.password}`,
             method: 'GET'
         })
-        mockReq.flush([mockStudent])
+        mockReq.flush([mockUser])
 
         service.logout()
         expect(localStorage.getItem('token')).toBeNull()
+        done()
     }) 
     
-    it('Logout debe desestablcer al usuario autenticado', (done) => {
+    /*it('Logout debe desestablcer al usuario autenticado', (done) => {
         service.login(mockAuthData).subscribe()
         const mockReq = httpControler.expectOne({
             url: `${service['baseURL']}/users?email=${mockAuthData.email}&password=${mockAuthData.password}`,
             method: 'GET'
         })
-        mockReq.flush([mockStudent])
+        mockReq.flush([mockUser])
 
         service.logout()
         service.authUser$.subscribe({
@@ -117,7 +118,7 @@ describe('AuthService', () => {
             url: `${service['baseURL']}/users?email=${mockAuthData.email}&password=${mockAuthData.password}`,
             method: 'GET'
         })
-        mockReq.flush([mockStudent])
+        mockReq.flush([mockUser])
 
         service.logout()
 

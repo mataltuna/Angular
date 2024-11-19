@@ -15,6 +15,13 @@
     >ALUMNOS</a>
     <a
         routerLinkActive
+        #enrollmentsLink="routerLinkActive"
+        routerLink="enrollments"
+        [activated]="enrollmentsLink.isActive"
+        mat-list-item
+    >INSCRIPCIONES</a>
+    <a
+        routerLinkActive
         #coursesLink="routerLinkActive"
         routerLink="courses"
         [activated]="coursesLink.isActive"

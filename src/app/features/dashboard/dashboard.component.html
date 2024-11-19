@@ -14,7 +14,7 @@
                     <span class="example-spacer"></span>
                 </div>
                 <div *ngIf="authUser$ | async; let authUser">
-                    <p>{{ authUser.firstName }} {{ authUser.lastName }}</p>
+                    <p>{{ authUser | userFullName }}</p>
                 </div>
             </div>
         </mat-toolbar>
