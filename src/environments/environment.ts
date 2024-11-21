@@ -1,3 +1,3 @@
 export const environment = {
-    apiBaseURL: 'https://alumnado-angular.onrender.com'
+    apiBaseURL: 'https://json-server-api-t0hh.onrender.com'
 };
