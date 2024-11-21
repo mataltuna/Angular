@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
   passwdInpType: 'password' | 'text' = 'password'
   loginForm: FormGroup;
+  isLoading = false
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +34,7 @@ export class LoginComponent {
   }
 
   doLogin() {
+    this.isLoading = true
     this.authService.login(this.loginForm.value).subscribe({
         next: (result) => {
           this.router.navigate(['dashboard', 'home'])
@@ -41,6 +43,9 @@ export class LoginComponent {
           if(err instanceof Error) {
             this.showError(err.message)
           }
+        },
+        complete: () => {
+          this.isLoading = false
         }
     })
   }

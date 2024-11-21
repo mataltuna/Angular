@@ -17,6 +17,7 @@ export class RegisterComponent {
   private baseURL = environment.apiBaseURL
   passwdInpType: 'password' | 'text' = 'password'
   registerForm: FormGroup;
+  isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +42,7 @@ export class RegisterComponent {
   }
 
   createUser(data: Omit<User, 'id' | 'token'>): Observable<User> {
+
     return this.httpsClient.post<User>(`${this.baseURL}/users`, {
         ...data,
         token: generateRandomString(20)
@@ -51,6 +53,7 @@ export class RegisterComponent {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
     } else {
+      this.isLoading = true
       let newUser: Omit<User, 'id'> = {
         ...this.registerForm.value,
       };

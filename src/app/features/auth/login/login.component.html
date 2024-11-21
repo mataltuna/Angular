@@ -1,32 +1,40 @@
 <h2>Inicia Sesion</h2>
-<form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="inpCont row">
-        <mat-form-field appearance="outline">
-            <mat-label>Correo electronico</mat-label>
-            <input formControlName="email" matInput placeholder="Ej: example@mail.com">
-            <mat-error>
-                @if(loginForm.get('email')?.hasError('required')) { Este campo es requerido }
-                @else if (loginForm.get('email')?.hasError('email')) { Este campo debe ser un correo electronico valido }
-            </mat-error>
-        </mat-form-field>
+@if (isLoading) {
+    <div class="loading-msg">
+        <mat-spinner></mat-spinner>
+        <h3>Cargando, por favor espere...</h3>
     </div>
-    <div class="inpCont row">
-        <mat-form-field appearance="outline">
-            <mat-label>Contraseña</mat-label>
-            <input formControlName="password" [type]="passwdInpType" matInput placeholder="Escribe">
-            <button type="button" (click)="togglePasswdInpType()" matSuffix mat-icon-button>
-                <mat-icon> visibility </mat-icon>
-            </button>
-            <mat-error>
-                @if(loginForm.get('password')?.hasError('required')) { Este campo es requerido }
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="d-flex align-items-center" id="action-cont">
-        <p>¿No tienes cuenta?</p>
-        <button type="button" (click)="goToRegister()" mat-button>Registrate</button>
-    </div>
-    <div class="col-12">
-        <button type="submit" mat-flat-button>Ingresar</button>
-    </div>
-</form>
+} @else {
+    <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="inpCont row">
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electronico</mat-label>
+                <input formControlName="email" matInput placeholder="Ej: example@mail.com">
+                <mat-error>
+                    @if(loginForm.get('email')?.hasError('required')) { Este campo es requerido }
+                    @else if (loginForm.get('email')?.hasError('email')) { Este campo debe ser un correo electronico valido }
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="inpCont row">
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input formControlName="password" [type]="passwdInpType" matInput placeholder="Escribe">
+                <button type="button" (click)="togglePasswdInpType()" matSuffix mat-icon-button>
+                    <mat-icon> visibility </mat-icon>
+                </button>
+                <mat-error>
+                    @if(loginForm.get('password')?.hasError('required')) { Este campo es requerido }
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="d-flex align-items-center" id="action-cont">
+            <p>¿No tienes cuenta?</p>
+            <button type="button" (click)="goToRegister()" mat-button>Registrate</button>
+        </div>
+        <div class="col-12">
+            <button type="submit" mat-flat-button>Ingresar</button>
+        </div>
+
+    </form>
+}

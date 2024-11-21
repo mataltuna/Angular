@@ -29,9 +29,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadStuds();
-    /*this.authService.authUser$.subscribe((user) => {
-      this.user = user?.role || null;  // Asume que el `User` tiene una propiedad `role`
-    });*/
   }
 
   loadStuds(): void {

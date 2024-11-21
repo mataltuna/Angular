@@ -1,67 +1,73 @@
 <h2>Create una cuenta</h2>
-<form id="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="row w-100">
-        <div class="col-6">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Nombre</mat-label>
-                <input formControlName="firstName" matInput placeholder="Ej: Juan">
-                <mat-error>
-                    @if(registerForm.get('firstName')?.hasError('required')) { Este campo es requerido }
-                    @else if (registerForm.get('firstName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-6">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Apellido</mat-label>
-                <input formControlName="lastName" matInput placeholder="Ej: Juan">
-                <mat-error>
-                    @if(registerForm.get('lastName')?.hasError('required')) { Este campo es requerido }
-                    @else if (registerForm.get('lastName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
-                </mat-error>
-            </mat-form-field>
-        </div>
+@if (isLoading) {
+    <div class="loading-msg">
+        <mat-spinner></mat-spinner>
+        <h3>Cargando, por favor espere...</h3>
     </div>
-    <div class="row">
-        <mat-form-field appearance="outline">
-            <mat-label>Correo electronico</mat-label>
-            <input formControlName="email" matInput placeholder="Ej: example@mail.com">
-            <mat-error>
-                @if(registerForm.get('email')?.hasError('required')) { Este campo es requerido }
-                @else if (registerForm.get('email')?.hasError('email')) { Este campo debe ser un correo electronico valido }
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="row w-100">
-        <div class="col-6">
-            <mat-form-field appearance="outline" id="passwd-user">
-                <mat-label>Contraseña</mat-label>
-                <input formControlName="password" [type]="passwdInpType" matInput placeholder="Ej: Perez">
-                <button type="button" (click)="togglePasswdInpType()" matSuffix mat-icon-button>
-                    <mat-icon>
-                        visibility
-                    </mat-icon>
-                </button>
-                <mat-error>
-                    @if(registerForm.get('password')?.hasError('required')) { Este campo es requerido }
-                </mat-error>
-            </mat-form-field>
+} @else {
+    <form id="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="row w-100">
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="firstName" matInput placeholder="Ej: Juan">
+                    <mat-error>
+                        @if(registerForm.get('firstName')?.hasError('required')) { Este campo es requerido }
+                        @else if (registerForm.get('firstName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Apellido</mat-label>
+                    <input formControlName="lastName" matInput placeholder="Ej: Juan">
+                    <mat-error>
+                        @if(registerForm.get('lastName')?.hasError('required')) { Este campo es requerido }
+                        @else if (registerForm.get('lastName')?.hasError('minlength')) { Este campo debe tener 3 caracteres como mínimo }
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </div>
-
-        <div class="col-6">
+        <div class="row">
             <mat-form-field appearance="outline">
-                <mat-label>Rol</mat-label>
-                <mat-select formControlName="role">
-                    <mat-option value="USER"> Usuario </mat-option>
-                    <mat-option value="ADMIN"> Admin </mat-option>
-                </mat-select>
+                <mat-label>Correo electronico</mat-label>
+                <input formControlName="email" matInput placeholder="Ej: example@mail.com">
                 <mat-error>
-                    @if(registerForm.get('role')?.hasError('required')) { Este campo es requerido }
+                    @if(registerForm.get('email')?.hasError('required')) { Este campo es requerido }
+                    @else if (registerForm.get('email')?.hasError('email')) { Este campo debe ser un correo electronico valido }
                 </mat-error>
             </mat-form-field>
         </div>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="w-90" mat-flat-button>Crear cuenta</button>
-    </div>
-</form>
+        <div class="row w-100">
+            <div class="col-6">
+                <mat-form-field appearance="outline" id="passwd-user">
+                    <mat-label>Contraseña</mat-label>
+                    <input formControlName="password" [type]="passwdInpType" matInput placeholder="Ej: Perez">
+                    <button type="button" (click)="togglePasswdInpType()" matSuffix mat-icon-button>
+                        <mat-icon>
+                            visibility
+                        </mat-icon>
+                    </button>
+                    <mat-error>
+                        @if(registerForm.get('password')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="role">
+                        <mat-option value="USER"> Usuario </mat-option>
+                        <mat-option value="ADMIN"> Admin </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        @if(registerForm.get('role')?.hasError('required')) { Este campo es requerido }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="w-90" mat-flat-button>Crear cuenta</button>
+        </div>
+    </form>
+}
