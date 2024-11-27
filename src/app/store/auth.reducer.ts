@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { User } from "../../shared/models";
-import { AuthActions } from "../actions/auth.actions";
+import { User } from "../shared/models";
+import { AuthActions } from "./auth.actions";
 
 export const authFeaturedName = 'auth'
 

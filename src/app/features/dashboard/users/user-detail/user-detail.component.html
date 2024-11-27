@@ -10,13 +10,13 @@
             <mat-list-item class="li-ttl" role="listitem"><span>Id:</span> {{ student?.id }}</mat-list-item>
             <mat-list-item class="li-ttl" role="listitem"><span>Correo Electronico:</span> {{ student?.email }}</mat-list-item>
             <mat-list-item class="li-ttl" role="listitem"><span>Cursos(actuales):</span></mat-list-item>
-            <mat-list-item *ngFor="let course of displayedCourses" role="listitem">{{ course }}</mat-list-item>
-            <div role="listitem" *ngIf="hasMultipleCourses()" class="demo-section">
+            <mat-list-item *ngFor="let course of displayedEnrolls" role="listitem">{{ student?.enrolls }}</mat-list-item>
+            <div role="listitem" *ngIf="hasMultipleEnrolls()" class="demo-section">
                 <button 
                     mat-raised-button 
                     (click)="toggleCourseVisibility()" 
-                    [attr.aria-expanded]="showAllCourses">
-                    {{ showAllCourses ? 'Ocultar' : 'Ver más cursos' }}
+                    [attr.aria-expanded]="showAllEnrolls">
+                    {{ showAllEnrolls ? 'Ocultar' : 'Ver más cursos' }}
                 </button>
             </div>
         </mat-list>

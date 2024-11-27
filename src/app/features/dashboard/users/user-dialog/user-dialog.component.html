@@ -24,31 +24,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>Curso</mat-label>
-                    <mat-select formControlName="courses" multiple>
-                        <mat-option *ngFor="let course of courses$ | async" [value]="course.name">{{ course.name }}</mat-option>
-                    </mat-select>
-                    <mat-error>
-                        @if(studentForm.get('courses')?.hasError('required')) { Este campo es requerido }
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>Correo electronico</mat-label>
-                    <input
-                    formControlName="email"
-                    matInput
-                    placeholder="Ej: tumail@example.com"
-                    required/>
-                    <mat-error>
-                        @if(studentForm.get('email')?.hasError('required')) { Este campo es requerido } 
-                        @else if (studentForm.get('email')?.hasError('email')) {Este campo debe tener un formato de correo electronico}
-                    </mat-error>
-                </mat-form-field>
-            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electronico</mat-label>
+                <input
+                formControlName="email"
+                matInput
+                placeholder="Ej: tumail@example.com"
+                required/>
+                <mat-error>
+                    @if(studentForm.get('email')?.hasError('required')) { Este campo es requerido } 
+                    @else if (studentForm.get('email')?.hasError('email')) {Este campo debe tener un formato de correo electronico}
+                </mat-error>
+            </mat-form-field>
         </div>
     </form>
 </div>

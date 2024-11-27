@@ -20,3 +20,13 @@ export const selectStudentsOptions = createSelector(
   selectEnrollmentState,
   (state) => state.studOpts
 )
+
+export const selectLoadEnrollError = createSelector(
+  selectEnrollmentState,
+  (state) => state.loadEnrollError
+)
+
+export const selectIsLoadingEnroll = createSelector(
+  selectEnrollmentState,
+  (state) => state.isLoadingEnroll
+)

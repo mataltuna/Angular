@@ -3,7 +3,7 @@ export interface Student {
     firstName: string;
     lastName: string;
     email: string;
-    courses: string[];
+    enrolls: string[];
     token: string;
 }
 
@@ -40,7 +40,7 @@ export interface User {
 
 export interface Enrollment {
     id: string,
-    studId: string,
+    studentId: string,
     courseId: string,
     stud?: Student,
     cours?: Course

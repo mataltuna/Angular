@@ -8,11 +8,13 @@ import { EnrollmentEffects } from './store/enrollment.effects';
 import { StoreModule } from '@ngrx/store';
 import { enrollmentFeature } from './store/enrollment.reducer';
 import { SharedModule } from '../../../shared/shared.module';
+import { EnrollmentsDialogComponent } from './enrollments-dialog/enrollments-dialog.component';
 
 
 @NgModule({
   declarations: [
     EnrollmentsComponent,
+    EnrollmentsDialogComponent,
   ],
   imports: [
     CommonModule,

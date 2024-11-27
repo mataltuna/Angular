@@ -1,32 +1,42 @@
 <div class="contContainer">
     <h2 appHighlight>Inscripciones</h2>
-    <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-            <mat-label>Alumnos</mat-label>
-            <mat-select formControlName="studId">
-                <mat-option *ngFor="let student of studOpts$ | async" [value]="student.id"> 
-                    {{ student | userFullName }}
-                </mat-option>
-            </mat-select>
-            <mat-error>
-                @if(enrollForm.get('studId')?.hasError('required')) { Este campo es requerido }
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Curso</mat-label>
-            <mat-select formControlName="courseId">
-                <mat-option *ngFor="let course of coursesOpts$ | async" [value]="course.id"> 
-                    {{ course.name }}
-                </mat-option>
-            </mat-select>
-            <mat-error>
-                @if(enrollForm.get('courseId')?.hasError('required')) { Este campo es requerido }
-            </mat-error> 
-        </mat-form-field>
-        <button type="submit" mat-flat-button>Inscribir</button>
-    </form>
-
-    <div>
-        <pre>{{ enrollments$ | async | json }}</pre>
-    </div>
+    @if (isLoadingEnroll$ | async) {
+        <div class="loading-msg">
+            <mat-spinner></mat-spinner>
+            <h3>Cargando, por favor espere...</h3>
+        </div>
+    } @else {
+        <button class="btnModal" mat-raised-button (click)="openModal()">
+            <mat-icon>add</mat-icon>
+            Inscribir Alumno
+        </button>
+        
+        <table mat-table [dataSource]="enrollments$" class="mat-elevation-z8">
+            <ng-container matColumnDef="idEnroll">
+                <th appHighlight mat-header-cell *matHeaderCellDef> ID. </th>
+                <td mat-cell *matCellDef="let enrollment"> {{ enrollment.id }} </td>
+            </ng-container>
+            <ng-container matColumnDef="studName">
+                <th appHighlight mat-header-cell *matHeaderCellDef> Nombre de Alumno </th>
+                <td mat-cell *matCellDef="let enrollment"> {{ enrollment.student | userFullName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="courseName">
+                <th appHighlight mat-header-cell *matHeaderCellDef> Nombre de curso </th>
+                <td mat-cell *matCellDef="let enrollment"> {{ enrollment.course?.name }} </td>
+            </ng-container>
+            <ng-container *ngIf="(authUser$ | async)?.role === 'ADMIN'" matColumnDef="actions">
+                <th appHighlight mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let enrollment" class="table-btns">
+                    <button (click)="openModal(enrollment)" mat-icon-button> 
+                        <mat-icon> edit </mat-icon>
+                    </button>
+                    <button (click)="handleDelete(enrollment.id)" mat-icon-button>
+                        <mat-icon> delete </mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    }
 </div>

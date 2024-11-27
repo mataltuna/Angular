@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/models';
@@ -14,7 +13,9 @@ export class DashboardComponent {
   isSidenavOpened = true;
   authUser$: Observable<User | null>
 
-  constructor(private router: Router,private authService: AuthService){
+  constructor(
+    private authService: AuthService,
+  ){
     this.authUser$ = this.authService.authUser$
   }
 }

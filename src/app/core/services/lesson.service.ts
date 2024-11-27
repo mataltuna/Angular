@@ -4,8 +4,6 @@ import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Lesson } from "../../shared/models";
 
-let CLASSES_DB: Lesson[] = []
-
 @Injectable({ providedIn: 'root' })
 
 export class LessonService {

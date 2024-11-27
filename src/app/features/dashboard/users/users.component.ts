@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { StudentsService } from '../../../core/services/students.service';
-import { Student } from '../../../shared/models';
+import { Student, User } from '../../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../core/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -16,17 +17,19 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'courses', 'actions'];
   dataSource: Student[] = [];
   isLoading = false;
-  isAdmin: boolean = false;
   user: string | null = null;
-  authService!: AuthService;
+  authUser$: Observable<User | null>
 
   constructor(
     private matDialog: MatDialog,
     private studentsService: StudentsService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
-
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
+  ) {
+    this.authUser$ = this.authService.authUser$
+  }
+  
   ngOnInit(): void {
     this.loadStuds();
   }

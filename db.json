@@ -8,6 +8,15 @@
       "password": "admin1405",
       "role": "ADMIN",
       "token": "iNidJDfL9nEnhIz49E0o"
+    },
+    {
+      "id": "6sd9",
+      "firstName": "Pedro",
+      "lastName": "Admin",
+      "email": "admi@gmail.com",
+      "password": "admin1405",
+      "role": "USER",
+      "token": "iNidJDfL9n3nhIz49E0o"
     }
   ],
   "courses": [
@@ -49,9 +58,7 @@
       "firstName": "Juan",
       "lastName": "Perez",
       "email": "juanPe@gmail.com",
-      "courses": [
-        "Programación Frontend"
-      ],
+      "enrolls": [],
       "token": "fBm6bSLfS4wmefQ2V323"
     },
     {
@@ -59,10 +66,9 @@
       "firstName": "Pedro",
       "lastName": "Sanchez",
       "email": "sanchPedri@gmail.com",
-      "courses": [
-        "Ciberseguridad"
-      ],
+      "enrolls": [],
       "token": "fhV7PRkq15WE6Wph7Tfj"
     }
-  ]
+  ],
+  "enrollments": []
 }

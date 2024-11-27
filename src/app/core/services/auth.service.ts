@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable} from "rxjs";
+import { map, Observable} from "rxjs";
 import { AuthData, User } from '../../shared/models/index';
 import { Router } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Store } from "@ngrx/store";
-import { AuthActions } from "../../store/actions/auth.actions";
-import { selectAuthenticatedUser } from "../../store/selectors/auth.selector";
+import { AuthActions } from "../../store/auth.actions";
+import { selectAuthenticatedUser } from "../../store/auth.selector";
 
 @Injectable({providedIn:'root'})
 export class AuthService {

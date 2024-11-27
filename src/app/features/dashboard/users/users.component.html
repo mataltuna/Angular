@@ -12,33 +12,36 @@
         </button>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
-            <th appHighlight mat-header-cell *matHeaderCellDef> ID. </th>
-            <td mat-cell *matCellDef="let student"> {{ student.id }} </td>
+                <th appHighlight mat-header-cell *matHeaderCellDef> ID. </th>
+                <td mat-cell *matCellDef="let student"> {{ student.id }} </td>
             </ng-container>
             <ng-container matColumnDef="name">
-            <th appHighlight mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let student"> {{ student | userFullName }} </td>
+                <th appHighlight mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let student"> {{ student | userFullName }} </td>
             </ng-container>
             <ng-container matColumnDef="email">
-            <th appHighlight mat-header-cell *matHeaderCellDef> Correo electronico </th>
-            <td mat-cell *matCellDef="let student"> {{ student.email }} </td>
+                <th appHighlight mat-header-cell *matHeaderCellDef> Correo electronico </th>
+                <td mat-cell *matCellDef="let student"> {{ student.email }} </td>
             </ng-container>
             <ng-container matColumnDef="courses">
-            <th appHighlight mat-header-cell *matHeaderCellDef> Cursos </th>
-            <td mat-cell *matCellDef="let student">{{ student.courses }}</td>
+                <th appHighlight mat-header-cell *matHeaderCellDef> Cursos inscriptos </th>
+                <td mat-cell *matCellDef="let student"> @if(student.enrolls?.length > 0){ {{ student.enrolls }} }
+                                                        @else { Sin inscripciones a cursos aún } </td>
             </ng-container>
             <ng-container matColumnDef="actions">
                 <th appHighlight mat-header-cell *matHeaderCellDef> Acciones </th>
-                <td mat-cell *matCellDef="let student">
+                <td mat-cell *matCellDef="let student" class="table-btns">
                     <button (click)="goToDetail(student.id)" mat-icon-button>
                         <mat-icon> visibility </mat-icon>
                     </button>
-                    <button (click)="openModal(student)" mat-icon-button>
-                        <mat-icon> edit </mat-icon>
-                    </button>
-                    <button (click)="onDelete(student.id)" mat-icon-button>
-                        <mat-icon> delete </mat-icon>
-                    </button>
+                    @if((authUser$ | async)?.role === 'ADMIN') {
+                        <button (click)="openModal(student)" mat-icon-button> 
+                            <mat-icon> edit </mat-icon>
+                        </button>
+                        <button (click)="onDelete(student.id)" mat-icon-button>
+                            <mat-icon> delete </mat-icon>
+                        </button>
+                    }
                 </td>
             </ng-container>
             

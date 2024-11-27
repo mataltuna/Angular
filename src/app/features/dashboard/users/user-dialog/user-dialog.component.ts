@@ -38,8 +38,7 @@ export class UserDialogComponent {
     this.studentForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      courses: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.email]]
     });
     this.courses$ = this.coursesService.getCourses()
     this.patchFormValue();

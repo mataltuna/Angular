@@ -6,7 +6,6 @@ import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { generateRandomString } from '../../../shared/utils';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',

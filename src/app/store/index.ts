@@ -1,5 +1,5 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { authFeaturedName, authReducer, AuthState } from "./reducers/auth.reducer";
+import { authFeaturedName, authReducer, AuthState } from "./auth.reducer";
 
 interface RootState {
     [authFeaturedName]: AuthState

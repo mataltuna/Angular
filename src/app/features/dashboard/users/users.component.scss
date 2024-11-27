@@ -2,4 +2,15 @@
     #btnModal {
         margin-bottom: 1rem;
     }
+    .table-btns {
+        padding: 6px 0;
+        display: flex;
+        
+        button {
+            
+            mat-icon {
+                width: 100%;
+            }
+        }
+    }
 }

@@ -1,63 +1,20 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { EnrollmentActions } from './enrollment.actions';
 import { Course, Enrollment, Student } from '../../../../shared/models';
-import { generateRandomString } from '../../../../shared/utils';
 
 export const enrollmentFeatureKey = 'enrollment';
 
-const ENROLLMENTS_DB: Enrollment[] = [
-  {
-    id: 'dfd475',
-    studId: 'df6e',
-    courseId: 'fs6w'
-  }
-]
-
-const COURSES_DB: Course[] = [
-  {
-    id: 'de98',
-    name: 'Programación Frontend',
-    createdAt: new Date,
-    maxStud: 50
-  },
-  {
-    id: '4hr6',
-    name: 'Programación Backend',
-    createdAt: new Date,
-    maxStud: 60
-  }
-]
-
-const STUDENT_DB: Student[] = [
-  {
-    id: "8768",
-    firstName: "Juan",
-    lastName: "Perez",
-    email: "juanPe@gmail.com",
-    courses: [
-      "Programación Frontend"
-    ],
-    token: "fBm6bSLfS4wmefQ2V323"
-  },
-  {
-    id: "d4a4",
-    firstName: "Pedro",
-    lastName: "Sanchez",
-    email: "sanchPedri@gmail.com",
-    courses: [
-      "Ciberseguridad"
-    ],
-    token: "fhV7PRkq15WE6Wph7Tfj"
-  }
-]
-
 export interface State {
+  isLoadingEnroll: boolean
+  loadEnrollError: Error | null
   enrollments: Enrollment[]
   coursesOpts: Course[]
   studOpts: Student[]
 }
 
 export const initialState: State = {
+  isLoadingEnroll: false,
+  loadEnrollError: null,
   enrollments: [],
   coursesOpts: [],
   studOpts: []
@@ -68,33 +25,90 @@ export const reducer = createReducer(
   on(EnrollmentActions.loadEnrollments, (state) => {
     return {
       ...state,
-      enrollments: [...ENROLLMENTS_DB]
+      isLoadingEnroll: true
     }
   }),
-  on(EnrollmentActions.loadCoursesOptions, (state) => {
+  on(EnrollmentActions.loadEnrollmentsSuccess, (state, action) => {
     return {
       ...state,
-      coursesOpts: [...COURSES_DB]
+      enrollments: action.data,
+      loadEnrollError: null,
+      isLoadingEnroll: false
     }
   }),
-  on(EnrollmentActions.loadStudentsOptions, (state) => {
+  on(EnrollmentActions.loadEnrollmentsFailure, (state, action) => {
     return {
       ...state,
-      studOpts: [...STUDENT_DB]
+      ...initialState,
+      loadEnrollError: action.error
     }
   }),
-  on(EnrollmentActions.createEnrollment, (state, action) => {
+  on(EnrollmentActions.loadCoursesAndStudentsOptions, (state) => {
     return {
       ...state,
-      enrollments: [
-        ...state.enrollments, 
-        {
-          id: generateRandomString(4),
-          courseId: action.courseId,
-          studId: action.studId 
-        },
-      ],
+      isLoadingEnroll: true,
     }
+  }),
+  on(EnrollmentActions.loadCoursesAndStudentsOptionsSuccess, (state, action) => {
+    return {
+      ...state,
+      loadEnrollError: null,
+      isLoadingEnroll: false,
+      coursesOpts: action.courses,
+      studOpts: action.students
+    }
+  }),
+  on(EnrollmentActions.loadCoursesAndStudentsOptionsFailure, (state, {error}) => {
+    return {
+      ...state,
+      loadEnrollError: error,
+      isLoadingEnroll: false,
+    }
+  }),
+
+  on(EnrollmentActions.updateEnrollment, (state) => {
+    return {
+      ...state,
+      isLoadingEnroll: true
+    }
+    
+  }),
+  on(EnrollmentActions.updateEnrollmentSuccess, (state, { data }) => {
+    return {
+      ...state,
+      enrollments: data,
+      isLoadingEnroll: false
+    }
+  }),
+  on(EnrollmentActions.updateEnrollmentFailure, (state, { error }) => {
+    return {
+      ...state,
+      loadEnrollError: error,
+      isLoadingEnroll: false
+    }
+  }),
+
+  on(EnrollmentActions.deleteEnrollment, (state) => {
+    return {
+      ...state,
+      isLoadingEnroll: true
+    }
+    
+  }),
+  on(EnrollmentActions.deleteEnrollmentSuccess, (state, { data }) => {
+    return {
+      ...state,
+      enrollments: data,
+      isLoadingEnroll: false
+    }
+  }),
+  on(EnrollmentActions.deleteEnrollmentFailure, (state, { error }) => {
+    return {
+      ...state,
+      loadEnrollError: error,
+      isLoadingEnroll: false
+    }
+    
   })
 );
 
